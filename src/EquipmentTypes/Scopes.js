@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import Classes from '../constants/Classes.js';
 import ModifiableParams from '../constants/ModifiableParams.js';
 
+import GenerateXML from '../GenerateXML.js';
+import Checklist from '../Checklist.js';
+import FileUpload from '../FileUpload.js';
+
 const EquipmentForm = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({
     name: '',
@@ -12,46 +16,9 @@ const EquipmentForm = ({ setEquipmentType }) => {
     description: '',
     img: '',
     unlockCost: '',
+    ddsFile: null,
   });
-
-  const handleCheckboxChange = (e, field) => {
-    const { value, checked } = e.target;
-    setEquipmentForm((prev) => ({
-      ...prev,
-      [field]: checked
-        ? [...prev[field], value]
-        : prev[field].filter((item) => item !== value),
-    }));
-  };
-
-  const generateXML = () => {
-    let xml = '<Equipment>\n';
-
-    xml += `  <Bind eqp="${equipmentForm.name}">\n`;
-    equipmentForm.bindTo.forEach((className) => {
-      xml += `    <to name="${className}"/>\n`;
-    });
-    xml += '  </Bind>\n';
-
-    xml += `  <Scope name="${equipmentForm.name}" 
-    inventoryBinding="${equipmentForm.inventoryBinding}"
-    tooltip="${equipmentForm.tooltip}"
-    description="${equipmentForm.description}"
-    img="${equipmentForm.img}"
-    unlockCost="${equipmentForm.unlockCost}"`;
-
-    if (equipmentForm.modifiableParams.length > 0) {
-      xml += `\n\n    <ModifiableParams\n`;
-      equipmentForm.modifiableParams.forEach((param) => {
-        xml += `       ${param}=""\n`;
-      });
-      xml += '    />';
-    }
-    xml += '\n  </Scope>';
-
-    xml += '\n</Equipment>';
-    return xml;
-  };
+  console.error(equipmentForm);
 
   return (
     <div className="p-8">
@@ -64,7 +31,6 @@ const EquipmentForm = ({ setEquipmentType }) => {
 
       <h2 className="text-lg font-semibold mb-4">Create New Scope</h2>
       <form className="space-y-4">
-        {/* Name Input */}
         <div>
           <label className="block text-sm font-medium mb-1">Name</label>
           <input
@@ -77,86 +43,40 @@ const EquipmentForm = ({ setEquipmentType }) => {
           />
         </div>
 
-        {/* Bind to Classes (Styled Checkboxes) */}
+        {/* Bind to Classes */}
         <div>
           <label className="block text-sm font-medium mb-1">
             Bind to Classes
           </label>
-          <div className="w-full p-2 border rounded h-32 overflow-y-auto bg-white">
-            {Classes.map((className) => (
-              <label
-                key={className}
-                className={`flex items-center space-x-2 px-2 py-1 cursor-pointer hover:bg-gray-100 rounded ${
-                  equipmentForm.bindTo.includes(className) ? 'bg-gray-200' : ''
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  value={className}
-                  checked={equipmentForm.bindTo.includes(className)}
-                  onChange={(e) => handleCheckboxChange(e, 'bindTo')}
-                  className="rounded"
-                />
-                <span>{className}</span>
-              </label>
-            ))}
-          </div>
+          <Checklist
+            dataArray={Classes}
+            type={equipmentForm.bindTo}
+            typeStr={'bindTo'}
+            setEquipmentForm={setEquipmentForm}
+          />
         </div>
 
-        {/* Modifiable Parameters (Styled Checkboxes) */}
+        {/* Modifiable Parameters*/}
         <div>
           <label className="block text-sm font-medium mb-1">
             Modifiable Parameters
           </label>
-          <div className="w-full p-2 border rounded h-32 overflow-y-auto bg-white">
-            {ModifiableParams.map((param) => (
-              <label
-                key={param}
-                className={`flex items-center space-x-2 px-2 py-1 cursor-pointer hover:bg-gray-100 rounded ${
-                  equipmentForm.modifiableParams.includes(param)
-                    ? 'bg-gray-200'
-                    : ''
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  value={param}
-                  checked={equipmentForm.modifiableParams.includes(param)}
-                  onChange={(e) => handleCheckboxChange(e, 'modifiableParams')}
-                  className="rounded"
-                />
-                <span>{param}</span>
-              </label>
-            ))}
-          </div>
+          <Checklist
+            dataArray={ModifiableParams}
+            type={equipmentForm.modifiableParams}
+            typeStr={'modifiableParams'}
+            setEquipmentForm={setEquipmentForm}
+          />
         </div>
+
+        {/* DDS File Upload */}
+        <FileUpload
+          equipmentForm={equipmentForm}
+          setEquipmentForm={setEquipmentForm}
+        />
 
         {/* XML Preview */}
-        <div>
-          <label className="block text-sm font-medium mb-1">Preview</label>
-          <pre className="bg-gray-100 p-4 rounded overflow-x-auto text-sm">
-            {generateXML()}
-          </pre>
-        </div>
-
-        {/* Download XML Button */}
-        <button
-          type="button"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          onClick={() => {
-            const blob = new Blob([generateXML()], { type: 'text/xml' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'equipment.xml';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-          }}
-        >
-          Download XML
-        </button>
+        <GenerateXML equipmentForm={equipmentForm} />
       </form>
     </div>
   );
