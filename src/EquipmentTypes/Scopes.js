@@ -55,31 +55,23 @@ const EquipmentForm = ({ setEquipmentType }) => {
         />
 
         {/* Bind to Classes */}
-        <div>
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Bind to Classes
-            </label>
-            <Checklist
-              dataArray={Classes}
-              type={equipmentForm.bindTo}
-              typeStr={'bindTo'}
-              setEquipmentForm={setEquipmentForm}
-            />
-          </div>
+        <div className="columns-2">
+          <Checklist
+            title={'Bind to Classes'}
+            dataArray={Classes}
+            type={equipmentForm.bindTo}
+            typeStr={'bindTo'}
+            setEquipmentForm={setEquipmentForm}
+          />
 
           {/* Modifiable Parameters*/}
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Modifiable Parameters
-            </label>
-            <Checklist
-              dataArray={ModifiableParams}
-              type={equipmentForm.modifiableParams}
-              typeStr={'modifiableParams'}
-              setEquipmentForm={setEquipmentForm}
-            />
-          </div>
+          <Checklist
+            title={'Modifiable Parameters'}
+            dataArray={ModifiableParams}
+            type={equipmentForm.modifiableParams}
+            typeStr={'modifiableParams'}
+            setEquipmentForm={setEquipmentForm}
+          />
         </div>
 
         {/* DDS File Upload */}

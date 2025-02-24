@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Checklist = ({ dataArray, type, typeStr, setEquipmentForm }) => {
+const Checklist = ({ title, dataArray, type, typeStr, setEquipmentForm }) => {
   const handleToggle = (key) => {
     setEquipmentForm((prev) => {
       const isKeyValuePair = typeof dataArray[0] === 'object';
@@ -58,55 +58,58 @@ const Checklist = ({ dataArray, type, typeStr, setEquipmentForm }) => {
   };
 
   return (
-    <div className="w-full p-2 border rounded h-32 overflow-y-auto bg-white">
-      {dataArray.map((item) => {
-        const isKeyValuePair = typeof item === 'object';
-        const key = isKeyValuePair ? item.label : item;
-        const label = isKeyValuePair ? item.label : item;
+    <div>
+      <label className="block text-sm font-medium mb-1">{title}</label>
+      <div className="w-full p-2 border rounded h-32 overflow-y-auto bg-white">
+        {dataArray.map((item) => {
+          const isKeyValuePair = typeof item === 'object';
+          const key = isKeyValuePair ? item.label : item;
+          const label = isKeyValuePair ? item.label : item;
 
-        const isChecked = isKeyValuePair
-          ? Array.isArray(type) && type.some((t) => t.label === key)
-          : type.includes(key);
+          const isChecked = isKeyValuePair
+            ? Array.isArray(type) && type.some((t) => t.label === key)
+            : type.includes(key);
 
-        const currentValue =
-          isKeyValuePair && Array.isArray(type)
-            ? type.find((t) => t.label === key)?.value || ''
-            : '';
+          const currentValue =
+            isKeyValuePair && Array.isArray(type)
+              ? type.find((t) => t.label === key)?.value || ''
+              : '';
 
-        console.error(type, item, currentValue);
+          console.error(type, item, currentValue);
 
-        return (
-          <div
-            key={key}
-            onClick={() => handleToggle(key)}
-            className={`flex items-center justify-between space-x-2 px-2 py-1 cursor-pointer hover:bg-gray-100 rounded ${
-              isChecked ? 'bg-gray-200' : ''
-            }`}
-          >
-            <div className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={isChecked}
-                readOnly
-                className="rounded cursor-pointer"
-              />
-              <span>{label}</span>
+          return (
+            <div
+              key={key}
+              onClick={() => handleToggle(key)}
+              className={`flex items-center justify-between space-x-2 px-2 py-1 cursor-pointer hover:bg-gray-100 rounded ${
+                isChecked ? 'bg-gray-200' : ''
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={isChecked}
+                  readOnly
+                  className="rounded cursor-pointer"
+                />
+                <span>{label}</span>
+              </div>
+
+              {isKeyValuePair && isChecked && (
+                <input
+                  type="text"
+                  value={currentValue}
+                  onChange={(e) => handleValueChange(e, key)}
+                  className="w-16 p-1 border rounded text-sm"
+                  placeholder="Value"
+                  onClick={(e) => e.stopPropagation()}
+                  disabled={item.readOnly}
+                />
+              )}
             </div>
-
-            {isKeyValuePair && isChecked && (
-              <input
-                type="text"
-                value={currentValue}
-                onChange={(e) => handleValueChange(e, key)}
-                className="w-16 p-1 border rounded text-sm"
-                placeholder="Value"
-                onClick={(e) => e.stopPropagation()}
-                disabled={item.readOnly}
-              />
-            )}
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

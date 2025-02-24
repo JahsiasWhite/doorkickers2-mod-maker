@@ -2,12 +2,19 @@ import ExportZip from './ExportZIP.js';
 
 const GenerateXML = ({ equipmentForm }) => {
   const generateXML = () => {
+    return generateScopeXML();
+  };
+
+  function generateScopeXML() {
     let xml = '<Equipment>\n';
 
-    xml += `  <Bind eqp="${equipmentForm.name}">\n`;
-    equipmentForm.bindTo.forEach((className) => {
-      xml += `    <to name="${className}"/>\n`;
-    });
+    // xml += `  <Bind eqp="${equipmentForm.name}">\n`;
+    // equipmentForm.bindTo.forEach((className) => {
+    //   xml += `    <to name="${className}"/>\n`;
+    // });
+    // xml += '  </Bind>\n';
+    xml += `  <Bind eqp="${equipmentForm.bindTo[0]}">\n`;
+    xml += `    <to name="${equipmentForm.name}"/>\n`;
     xml += '  </Bind>\n';
 
     xml += `  <Scope name="${equipmentForm.name}" 
@@ -29,7 +36,7 @@ const GenerateXML = ({ equipmentForm }) => {
 
     xml += '\n</Equipment>';
     return xml;
-  };
+  }
 
   return (
     <>
