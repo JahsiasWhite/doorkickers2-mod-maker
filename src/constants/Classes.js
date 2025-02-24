@@ -1,3 +1,3 @@
-const Classes = ['Rangers', 'BlackOps', 'SwatAssaulter'];
+const Classes = ['Rangers', 'Assault', 'BlackOps', 'SwatAssaulter'];
 
 export default Classes;

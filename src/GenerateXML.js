@@ -14,14 +14,14 @@ const GenerateXML = ({ equipmentForm }) => {
         inventoryBinding="${equipmentForm.inventoryBinding}"
         tooltip="${equipmentForm.tooltip}"
         description="${equipmentForm.description}"
-        img="${equipmentForm.img}"
-        unlockCost="${equipmentForm.unlockCost}"`;
+        img="${equipmentForm.img}"`;
+    // unlockCost="${equipmentForm.unlockCost}"`;
 
     console.error(equipmentForm);
     if (equipmentForm.modifiableParams.length > 0) {
       xml += `\n\n    <ModifiableParams\n`;
       equipmentForm.modifiableParams.forEach((param) => {
-        xml += `       ${param.label}=""\n`;
+        xml += `       ${param.label}="${param.value}"\n`;
       });
       xml += '    />';
     }

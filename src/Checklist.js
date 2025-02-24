@@ -1,29 +1,42 @@
+import React from 'react';
+
 const Checklist = ({ dataArray, type, typeStr, setEquipmentForm }) => {
   const handleToggle = (key) => {
     setEquipmentForm((prev) => {
-      const isKeyValuePair = typeof dataArray[0] === 'object'; // Detect format
+      const isKeyValuePair = typeof dataArray[0] === 'object';
 
       if (isKeyValuePair) {
-        // If it is an array of key-value pairs, handle it like an array
-        const updatedField = prev[typeStr] || [];
-        const index = updatedField.findIndex((item) => item.label === key);
+        // For key-value pairs, we want to maintain the array of objects format
+        const currentItems = Array.isArray(prev[typeStr]) ? prev[typeStr] : [];
+        const itemExists = currentItems.some((item) => item.label === key);
 
-        if (index > -1) {
-          // If it exists, remove it from the array
-          updatedField.splice(index, 1);
+        if (itemExists) {
+          // Disable
+          return {
+            ...prev,
+            [typeStr]: currentItems.filter((item) => item.label !== key),
+          };
         } else {
-          // If it doesn't exist, add it to the array
-          updatedField.push({ label: key });
-          console.error('HMM: ', key, updatedField, updatedField[0]);
+          // Add the item if it doesn't exist
+          const item = dataArray.find((item) => item.label === key);
+          return {
+            ...prev,
+            [typeStr]: [
+              ...currentItems,
+              {
+                label: key,
+                value: item.value ? item.value : '',
+              },
+            ],
+          };
         }
-
-        return { ...prev, [typeStr]: updatedField };
       } else {
+        // For simple arrays, keep the existing logic
         return {
           ...prev,
           [typeStr]: type.includes(key)
-            ? type.filter((item) => item !== key) // Remove from array
-            : [...type, key], // Add to array
+            ? type.filter((item) => item !== key)
+            : [...type, key],
         };
       }
     });
@@ -31,22 +44,36 @@ const Checklist = ({ dataArray, type, typeStr, setEquipmentForm }) => {
 
   const handleValueChange = (e, key) => {
     const { value } = e.target;
-    setEquipmentForm((prev) => ({
-      ...prev,
-      [typeStr]: { ...prev[typeStr], [key]: value },
-    }));
+    setEquipmentForm((prev) => {
+      const currentItems = Array.isArray(prev[typeStr]) ? prev[typeStr] : [];
+      const updatedItems = currentItems.map((item) =>
+        item.label === key ? { ...item, value } : item
+      );
+
+      return {
+        ...prev,
+        [typeStr]: updatedItems,
+      };
+    });
   };
 
   return (
     <div className="w-full p-2 border rounded h-32 overflow-y-auto bg-white">
       {dataArray.map((item) => {
         const isKeyValuePair = typeof item === 'object';
-        console.error(item, item.key);
         const key = isKeyValuePair ? item.label : item;
         const label = isKeyValuePair ? item.label : item;
+
         const isChecked = isKeyValuePair
-          ? type.hasOwnProperty(key)
+          ? Array.isArray(type) && type.some((t) => t.label === key)
           : type.includes(key);
+
+        const currentValue =
+          isKeyValuePair && Array.isArray(type)
+            ? type.find((t) => t.label === key)?.value || ''
+            : '';
+
+        console.error(type, item, currentValue);
 
         return (
           <div
@@ -60,21 +87,21 @@ const Checklist = ({ dataArray, type, typeStr, setEquipmentForm }) => {
               <input
                 type="checkbox"
                 checked={isChecked}
-                readOnly // We handle toggle via div click, so make checkbox readOnly
+                readOnly
                 className="rounded cursor-pointer"
               />
               <span>{label}</span>
             </div>
 
-            {/* Show value input only if it's a key-value checklist and selected */}
-            {isKeyValuePair && isChecked && !item.canEdit && (
+            {isKeyValuePair && isChecked && (
               <input
                 type="text"
-                value={type[key]}
+                value={currentValue}
                 onChange={(e) => handleValueChange(e, key)}
                 className="w-16 p-1 border rounded text-sm"
                 placeholder="Value"
-                onClick={(e) => e.stopPropagation()} // Prevent div click when editing
+                onClick={(e) => e.stopPropagation()}
+                disabled={item.readOnly}
               />
             )}
           </div>
