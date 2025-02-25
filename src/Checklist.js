@@ -59,8 +59,8 @@ const Checklist = ({ title, dataArray, type, typeStr, setEquipmentForm }) => {
 
   return (
     <div>
-      <label className="block text-sm font-medium mb-1">{title}</label>
-      <div className="w-full p-2 border rounded h-32 overflow-y-auto bg-white">
+      <label className="block text-sm font-medium text-gray-300">{title}</label>
+      <div className="w-full p-2 border rounded-lg h-32 overflow-y-auto text-gray-100 bg-gray-700">
         {dataArray.map((item) => {
           const isKeyValuePair = typeof item === 'object';
           const key = isKeyValuePair ? item.label : item;

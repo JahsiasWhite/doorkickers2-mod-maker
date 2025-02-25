@@ -2,6 +2,16 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+body {
+  @apply bg-gray-900;
+
+  --game-text-color: #f27805;
+  --game-grey-background-color: rgb(27 29 27);
+
+  /* color: var(--game-text-color); */
+  /* background-color: var(--game-grey-background-color); */
+}
+
 .columns-2 {
   column-count: 2;
 }

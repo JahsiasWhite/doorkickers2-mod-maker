@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import EquipmentForm from './EquipmentForm.js';
 import Scopes from './EquipmentTypes/Scopes.js';
+import Card from './Card.js';
 
 const EquipmentTypeSelection = ({ setSelectedOption }) => {
   const [equipmentType, setEquipmentType] = useState(null);
@@ -35,16 +36,12 @@ const EquipmentTypeSelection = ({ setSelectedOption }) => {
 
       <div className="grid grid-cols-3 gap-6">
         {equipmentTypes.map((type) => (
-          <div
-            key={type.name}
-            className="cursor-pointer hover:bg-gray-50 transition-colors"
+          <Card
+            icon={type.icon}
+            title={type.name}
+            description={type.name}
             onClick={() => setEquipmentType(type.name)}
-          >
-            <div className="flex flex-col items-center justify-center p-6 h-48">
-              <type.icon className="w-12 h-12 mb-3 text-blue-500" />
-              <div className="text-center text-lg">{type.name}</div>
-            </div>
-          </div>
+          />
         ))}
       </div>
     </div>

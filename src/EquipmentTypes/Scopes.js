@@ -22,7 +22,7 @@ const EquipmentForm = ({ setEquipmentType }) => {
   console.error(equipmentForm);
 
   return (
-    <div className="p-8">
+    <div className="p-8 bg-gray-900;">
       <button
         onClick={() => setEquipmentType(null)}
         className="mb-8 text-blue-500 hover:text-blue-600"
@@ -30,7 +30,9 @@ const EquipmentForm = ({ setEquipmentType }) => {
         ← Back to Equipment Types
       </button>
 
-      <h2 className="text-lg font-semibold mb-4">Create New Scope</h2>
+      <h2 className="text-lg font-semibold mb-4 text-white">
+        Create New Scope
+      </h2>
       <form className="space-y-4">
         <SingleInput
           title={'Name'}
@@ -54,8 +56,8 @@ const EquipmentForm = ({ setEquipmentType }) => {
           }
         />
 
-        {/* Bind to Classes */}
         <div className="columns-2">
+          {/* Bind to Classes */}
           <Checklist
             title={'Bind to Classes'}
             dataArray={Classes}
