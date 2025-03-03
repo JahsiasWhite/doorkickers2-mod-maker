@@ -58,9 +58,9 @@ const Checklist = ({ title, dataArray, type, typeStr, setEquipmentForm }) => {
   };
 
   return (
-    <div>
+    <div style={{ overflow: 'auto' }}>
       <label className="block text-sm font-medium text-gray-300">{title}</label>
-      <div className="w-full p-2 border rounded-lg h-32 overflow-y-auto text-gray-100 bg-gray-700">
+      <div className="w-full p-2 border-gray-600 rounded-lg overflow-y-auto text-gray-100 bg-gray-700">
         {dataArray.map((item) => {
           const isKeyValuePair = typeof item === 'object';
           const key = isKeyValuePair ? item.label : item;
@@ -81,8 +81,8 @@ const Checklist = ({ title, dataArray, type, typeStr, setEquipmentForm }) => {
             <div
               key={key}
               onClick={() => handleToggle(key)}
-              className={`flex items-center justify-between space-x-2 px-2 py-1 cursor-pointer hover:bg-gray-100 rounded ${
-                isChecked ? 'bg-gray-200' : ''
+              className={`flex items-center justify-between space-x-2 px-2 py-1 cursor-pointer hover:bg-gray-800 rounded ${
+                isChecked ? 'bg-gray-800' : ''
               }`}
             >
               <div className="flex items-center space-x-2">
@@ -90,17 +90,19 @@ const Checklist = ({ title, dataArray, type, typeStr, setEquipmentForm }) => {
                   type="checkbox"
                   checked={isChecked}
                   readOnly
-                  className="rounded cursor-pointer"
+                  className="rounded cursor-pointer border-gray-500 bg-transparent"
                 />
                 <span>{label}</span>
               </div>
 
-              {isKeyValuePair && isChecked && (
+              {isKeyValuePair && (
                 <input
                   type="text"
                   value={currentValue}
                   onChange={(e) => handleValueChange(e, key)}
-                  className="w-16 p-1 border rounded text-sm"
+                  className={` ${
+                    isChecked ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  } w-16 p-1 border border-gray-600 rounded text-sm bg-gray-700 text-gray-100`}
                   placeholder="Value"
                   onClick={(e) => e.stopPropagation()}
                   disabled={item.readOnly}

@@ -13,7 +13,7 @@ const FileUpload = ({ equipmentForm, setEquipmentForm }) => {
   };
 
   return (
-    <div>
+    <div className="text-gray-300">
       <label className="block text-sm font-medium mb-1">DDS File</label>
       <input
         type="file"

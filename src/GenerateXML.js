@@ -6,6 +6,8 @@ const GenerateXML = ({ equipmentForm }) => {
   };
 
   function generateScopeXML() {
+    console.error(equipmentForm);
+
     let xml = '<Equipment>\n';
 
     // xml += `  <Bind eqp="${equipmentForm.name}">\n`;
@@ -24,7 +26,6 @@ const GenerateXML = ({ equipmentForm }) => {
         img="${equipmentForm.img}"`;
     // unlockCost="${equipmentForm.unlockCost}"`;
 
-    console.error(equipmentForm);
     if (equipmentForm.modifiableParams.length > 0) {
       xml += `\n\n    <ModifiableParams\n`;
       equipmentForm.modifiableParams.forEach((param) => {
@@ -41,7 +42,9 @@ const GenerateXML = ({ equipmentForm }) => {
   return (
     <>
       <div>
-        <label className="block text-sm font-medium mb-1">Preview</label>
+        <label className="block text-sm font-medium mb-1 text-gray-300">
+          Preview
+        </label>
         <pre className="bg-gray-100 p-4 rounded overflow-x-auto text-sm">
           {generateXML()}
         </pre>

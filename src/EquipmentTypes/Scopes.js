@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import Classes from '../constants/Classes.js';
 import ModifiableParams from '../constants/ModifiableParams.js';
+import MobilityModifiers from '../constants/MobilityModifiers.js';
 
 import SingleInput from '../SingleInput.js';
 import GenerateXML from '../GenerateXML.js';
@@ -12,6 +14,7 @@ const EquipmentForm = ({ setEquipmentType }) => {
     name: '',
     inventoryBinding: 'PrimaryWeaponScope',
     bindTo: [],
+    mobilityModifiers: [],
     modifiableParams: [],
     tooltip: '',
     description: '',
@@ -22,7 +25,7 @@ const EquipmentForm = ({ setEquipmentType }) => {
   console.error(equipmentForm);
 
   return (
-    <div className="p-8 bg-gray-900;">
+    <div className="p-8 bg-gray-900">
       <button
         onClick={() => setEquipmentType(null)}
         className="mb-8 text-blue-500 hover:text-blue-600"
@@ -63,6 +66,15 @@ const EquipmentForm = ({ setEquipmentType }) => {
             dataArray={Classes}
             type={equipmentForm.bindTo}
             typeStr={'bindTo'}
+            setEquipmentForm={setEquipmentForm}
+          />
+
+          {/* Mobility Modifiers */}
+          <Checklist
+            title={'Mobility Modifiers'}
+            dataArray={MobilityModifiers}
+            type={equipmentForm.mobilityModifiers}
+            typeStr={'mobilityModifiers'}
             setEquipmentForm={setEquipmentForm}
           />
 
