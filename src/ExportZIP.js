@@ -4,7 +4,32 @@ const ExportZip = ({ equipmentForm, generateXML }) => {
   const handleExportZip = async () => {
     const zip = new JSZip();
 
-    // Add XML file
+    // Add required mod.xml
+    zip.file(
+      'mod.xml',
+      `<!--
+"title" uniquely identifies the mod name in Steam Workshop. Once published to workshop, the mod name can no longer be changed.
+"description" what is says
+"author" what is says
+"tags" only show up in Steam Workshop. comma-separated values. preferably one of: 
+	Missions,Campaign,New Unit,UI,Equipment,Sound,Translation,Total Conversion,Other
+"gameVersion" game version with which the mod is compatible (if the game says we're at 0.35 gameVersion="35". If the game says 1.24 gameVersion="124")
+"changeNotes" only used when updating an already published mod, redundant otherwise
+"languageMod" should only be valid if this adds a new language to the game, in which case it will show up in the Languages options list
+-->
+<Mod
+	title="${equipmentForm.name}"
+	description="${equipmentForm.description}"
+	author="me"
+	tags=""	
+	changeNotes=""
+	languageMod=""
+	gameVersion="100"
+/>
+`
+    );
+
+    // Add modified equipment XML file
     zip.file(`equipment/scope_${equipmentForm.name}.xml`, generateXML());
 
     // Add DDS file if uploaded

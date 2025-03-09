@@ -3,19 +3,26 @@ import React, { useState } from 'react';
 import Classes from '../constants/Classes.js';
 import ModifiableParams from '../constants/ModifiableParams.js';
 import MobilityModifiers from '../constants/MobilityModifiers.js';
+import ConcealmentModifier from '../constants/ConcealmentModifier.js';
+import EquipmentModifier from '../constants/EquipmentModifier.js';
+import AttackTypeModifier from '../constants/AttackTypeModifier.js';
 
 import SingleInput from '../SingleInput.js';
 import GenerateXML from '../GenerateXML.js';
 import Checklist from '../Checklist.js';
 import FileUpload from '../FileUpload.js';
+import Firearms from '../constants/Firearms.js';
 
 const EquipmentForm = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({
     name: '',
     inventoryBinding: 'PrimaryWeaponScope',
     bindTo: [],
+    concealmentModifier: 0,
     mobilityModifiers: [],
     modifiableParams: [],
+    equipmentModifier: [],
+    attackTypeModifier: [],
     tooltip: '',
     description: '',
     img: '',
@@ -60,10 +67,10 @@ const EquipmentForm = ({ setEquipmentType }) => {
         />
 
         <div className="columns-2">
-          {/* Bind to Classes */}
+          {/* Bind to Firearms */}
           <Checklist
-            title={'Bind to Classes'}
-            dataArray={Classes}
+            title={'Bind to Firearms'}
+            dataArray={Firearms}
             type={equipmentForm.bindTo}
             typeStr={'bindTo'}
             setEquipmentForm={setEquipmentForm}
@@ -78,12 +85,42 @@ const EquipmentForm = ({ setEquipmentType }) => {
             setEquipmentForm={setEquipmentForm}
           />
 
-          {/* Modifiable Parameters*/}
+          {/* Concealment Modifier */}
+          <SingleInput
+            title={'Concealment Modifier'}
+            value={equipmentForm.concealmentModifier}
+            onChange={(e) =>
+              setEquipmentForm({
+                ...equipmentForm,
+                concealmentModifier: e.target.value,
+              })
+            }
+          />
+
+          {/* Modifiable Parameters */}
           <Checklist
             title={'Modifiable Parameters'}
             dataArray={ModifiableParams}
             type={equipmentForm.modifiableParams}
             typeStr={'modifiableParams'}
+            setEquipmentForm={setEquipmentForm}
+          />
+
+          {/* Equipment Modifier */}
+          <Checklist
+            title={'Equipment Modifier'}
+            dataArray={EquipmentModifier}
+            type={equipmentForm.equipmentModifier}
+            typeStr={'equipmentModifier'}
+            setEquipmentForm={setEquipmentForm}
+          />
+
+          {/* Attack Type Modifier */}
+          <Checklist
+            title={'Attack Type Modifier'}
+            dataArray={AttackTypeModifier}
+            type={equipmentForm.attackTypeModifier}
+            typeStr={'attackTypeModifier'}
             setEquipmentForm={setEquipmentForm}
           />
         </div>
