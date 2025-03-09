@@ -75,8 +75,6 @@ const Checklist = ({ title, dataArray, type, typeStr, setEquipmentForm }) => {
               ? type.find((t) => t.label === key)?.value || ''
               : '';
 
-          console.error(type, item, currentValue);
-
           return (
             <div
               key={key}

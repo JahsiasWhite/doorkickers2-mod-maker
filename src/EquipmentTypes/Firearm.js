@@ -12,17 +12,21 @@ import GenerateXML from '../GenerateXML.js';
 import Checklist from '../Checklist.js';
 import FileUpload from '../FileUpload.js';
 import Firearms from '../constants/Firearms.js';
+import ClassesChecklist from '../ClassesChecklist.js';
+import ProtectionArc from '../constants/ProtectionArc.js';
+import ProtectionArcChecklist from '../ProtectionArcChecklist.js';
 
-const EquipmentForm = ({ setEquipmentType }) => {
+const Firearm = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({
-    name: '',
-    inventoryBinding: 'PrimaryWeaponScope',
+    name: 'Firearm',
+    inventoryBinding: 'Firearm',
     bindTo: [],
     concealmentModifier: 0,
     mobilityModifiers: [],
     modifiableParams: [],
     equipmentModifier: [],
     attackTypeModifier: [],
+    protectionArc: [],
     tooltip: '',
     description: '',
     img: '',
@@ -30,7 +34,6 @@ const EquipmentForm = ({ setEquipmentType }) => {
     ddsFile: null,
     ddsFileSmall: null,
   });
-  console.error(equipmentForm);
 
   return (
     <div className="p-8 bg-gray-900">
@@ -42,7 +45,7 @@ const EquipmentForm = ({ setEquipmentType }) => {
       </button>
 
       <h2 className="text-lg font-semibold mb-4 text-white">
-        Create New Scope
+        Create New Armor
       </h2>
       <form className="space-y-4">
         <SingleInput
@@ -68,10 +71,10 @@ const EquipmentForm = ({ setEquipmentType }) => {
         />
 
         <div className="columns-2">
-          {/* Bind to Firearms */}
-          <Checklist
-            title={'Bind to Firearms'}
-            dataArray={Firearms}
+          {/* Bind to Classes */}
+          <ClassesChecklist
+            title={'Bind to Classes'}
+            dataArray={Classes}
             type={equipmentForm.bindTo}
             typeStr={'bindTo'}
             setEquipmentForm={setEquipmentForm}
@@ -124,6 +127,14 @@ const EquipmentForm = ({ setEquipmentType }) => {
             typeStr={'attackTypeModifier'}
             setEquipmentForm={setEquipmentForm}
           />
+
+          {/* Protection Arc */}
+          <ProtectionArcChecklist
+            dataArray={ProtectionArc}
+            type={equipmentForm.protectionArc}
+            equipmentForm={equipmentForm}
+            setEquipmentForm={setEquipmentForm}
+          />
         </div>
 
         {/* DDS File Upload */}
@@ -139,4 +150,4 @@ const EquipmentForm = ({ setEquipmentType }) => {
   );
 };
 
-export default EquipmentForm;
+export default Firearm;

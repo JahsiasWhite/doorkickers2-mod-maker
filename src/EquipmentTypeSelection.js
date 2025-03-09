@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
 import EquipmentForm from './EquipmentForm.js';
-import Scopes from './EquipmentTypes/Scopes.js';
 import Card from './Card.js';
+
+import Armor from './EquipmentTypes/Armor.js';
+import Scopes from './EquipmentTypes/Scopes.js';
+import Firearm from './EquipmentTypes/Firearm.js';
 
 const EquipmentTypeSelection = ({ setSelectedOption }) => {
   const [equipmentType, setEquipmentType] = useState(null);
 
   const equipmentTypes = [
-    { name: 'Stimulant', icon: 'Plus' },
+    { name: 'Armor', icon: 'Armor' },
     { name: 'Scope', icon: 'Shield' },
-    { name: 'Weapon', icon: 'Sword' },
+    { name: 'Firearm', icon: 'Sword' },
   ];
 
   if (equipmentType) {
     switch (equipmentType) {
       case 'Scope':
         return <Scopes setEquipmentType={setEquipmentType} />;
+      case 'Armor':
+        return <Armor setEquipmentType={setEquipmentType} />;
+      case 'Firearm':
+        return <Firearm setEquipmentType={setEquipmentType} />;
     }
     return (
       <EquipmentForm
