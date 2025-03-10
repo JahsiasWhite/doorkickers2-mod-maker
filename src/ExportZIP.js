@@ -36,6 +36,8 @@ const ExportZip = ({ equipmentForm, generateXML }) => {
       zip.file(`gameplay_settings/sound_ranges.xml`, generateXML());
     } else if (equipmentForm.type === 'xpTables') {
       zip.file(`gameplay_settings/xp_tables.xml`, generateXML());
+    } else if (equipmentForm.type === 'textures') {
+      zip.file(`gui/main_menu_background.xml`, generateXML());
     } else {
       // Equipment
       zip.file(

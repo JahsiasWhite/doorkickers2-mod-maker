@@ -4,6 +4,8 @@ import './App.css';
 import EquipmentTypeSelection from './EquipmentTypes/EquipmentTypeSelection.js';
 import GameSettingsSelection from './GameSettings/GameSettingsSelection.js';
 import Card from './Card.js';
+import HowToUseMods from './HowToUseMods.js';
+import Textures from './Textures.js';
 
 const ModMaker = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -35,6 +37,20 @@ const ModMaker = () => {
             description=""
             onClick={() => setSelectedOption('game')}
           />
+
+          <Card
+            icon={'Shield'}
+            title="Edit Textures"
+            description=""
+            onClick={() => setSelectedOption('textures')}
+          />
+
+          <Card
+            icon={'Shield'}
+            title="How To Use"
+            description=""
+            onClick={() => setSelectedOption('howto')}
+          />
         </div>
       </div>
     </div>
@@ -44,6 +60,10 @@ const ModMaker = () => {
     return <EquipmentTypeSelection setSelectedOption={setSelectedOption} />;
   } else if (selectedOption === 'game') {
     return <GameSettingsSelection setSelectedOption={setSelectedOption} />;
+  } else if (selectedOption === 'textures') {
+    return <Textures setSelectedOption={setSelectedOption} />;
+  } else if (selectedOption === 'howto') {
+    return <HowToUseMods setSelectedOption={setSelectedOption} />;
   }
 
   return renderLandingPage();

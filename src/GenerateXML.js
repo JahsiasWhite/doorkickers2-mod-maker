@@ -2,7 +2,6 @@ import ExportZip from './ExportZIP.js';
 
 const GenerateXML = ({ equipmentForm }) => {
   const generateXML = () => {
-    console.error(equipmentForm);
     if (equipmentForm.inventoryBinding === 'Armor') {
       return generateArmorXML();
     }
@@ -18,7 +17,15 @@ const GenerateXML = ({ equipmentForm }) => {
     if (equipmentForm.type === 'xpTables') {
       return generateXPTablesXML();
     }
-    return generateScopeXML();
+    if (equipmentForm.type === 'scope') {
+      return generateScopeXML();
+    }
+    if (equipmentForm.type === 'textures') {
+      return 'TODO';
+    }
+    console.error(equipmentForm);
+    console.error('No type found...');
+    return 'ERROR: No type found. Please report this bug';
   };
 
   function generateBindXML() {
@@ -53,15 +60,15 @@ const GenerateXML = ({ equipmentForm }) => {
   function generateParamsXML() {
     let paramsXML = `\n    <Params>\n`;
 
-    if (equipmentForm.equipmentModifier.length > 0) {
+    if (equipmentForm.equipmentModifier?.length > 0) {
       paramsXML += generateEquipmentModifierXML();
     }
 
-    if (equipmentForm.attackTypeModifier.length > 0) {
+    if (equipmentForm.attackTypeModifier?.length > 0) {
       paramsXML += generateAttackTypeModifierXML();
     }
 
-    if (equipmentForm.protectionArc.length > 0) {
+    if (equipmentForm.protectionArc?.length > 0) {
       paramsXML += generateProtectionArcXML();
     }
 

@@ -5,8 +5,12 @@ Allows for easy creation of
 - Equipment
   - Armor
   - Scopes
-  - Firearms
+  - Firearms TODO
 - Classes TODO
+- Game Settings
+  - Human Parameters
+  - Sound Ranges
+  - XP Tables
 
 ## Starting
 
@@ -18,6 +22,9 @@ npm run start
 - delete all console logs
 - new skin
 - rename and new image on tab
-- about page
 - pictures
 - info
+- see if we can fix the bindTo for scopes
+- add mod image
+- react scan
+- make sure no logs in terminal

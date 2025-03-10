@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import Card from '../Card.js';
 
-import Armor from '../EquipmentTypes/Armor.js';
-import Scopes from '../EquipmentTypes/Scopes.js';
-import Firearm from '../EquipmentTypes/Firearm.js';
 import HumanParams from './HumanParams.js';
 import BackButton from '../BackButton.js';
 import SoundRanges from './SoundRanges.js';
