@@ -30,15 +30,27 @@ const ExportZip = ({ equipmentForm, generateXML }) => {
     );
 
     // Add modified equipment XML file
-    zip.file(`equipment/scope_${equipmentForm.name}.xml`, generateXML());
-
-    // Add DDS file if uploaded
-    if (equipmentForm.ddsFile) {
-      const ddsBlob = await equipmentForm.ddsFile.arrayBuffer();
+    if (equipmentForm.type === 'humanParams') {
+      zip.file(`gameplay_settings/human_params.xml`, generateXML());
+    } else if (equipmentForm.type === 'soundRanges') {
+      zip.file(`gameplay_settings/sound_ranges.xml`, generateXML());
+    } else if (equipmentForm.type === 'xpTables') {
+      zip.file(`gameplay_settings/xp_tables.xml`, generateXML());
+    } else {
+      // Equipment
       zip.file(
-        `models/weapons/attachments/${equipmentForm.ddsFile.name}`,
-        ddsBlob
+        `equipment/${equipmentForm.type}_${equipmentForm.name}.xml`,
+        generateXML()
       );
+
+      // Add DDS file if uploaded
+      if (equipmentForm.ddsFile) {
+        const ddsBlob = await equipmentForm.ddsFile.arrayBuffer();
+        zip.file(
+          `models/weapons/attachments/${equipmentForm.ddsFile.name}`,
+          ddsBlob
+        );
+      }
     }
 
     // Generate ZIP and trigger download
@@ -46,7 +58,7 @@ const ExportZip = ({ equipmentForm, generateXML }) => {
       const url = URL.createObjectURL(content);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${equipmentForm.name}_mod.zip`;
+      a.download = `${equipmentForm.type}_mod.zip`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

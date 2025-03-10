@@ -12,10 +12,12 @@ import GenerateXML from '../GenerateXML.js';
 import Checklist from '../Checklist.js';
 import FileUpload from '../FileUpload.js';
 import Firearms from '../constants/Firearms.js';
+import BackButton from '../BackButton.js';
 
 const EquipmentForm = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({
     name: '',
+    type: 'scope',
     inventoryBinding: 'PrimaryWeaponScope',
     bindTo: [],
     concealmentModifier: 0,
@@ -34,12 +36,10 @@ const EquipmentForm = ({ setEquipmentType }) => {
 
   return (
     <div className="p-8 bg-gray-900">
-      <button
-        onClick={() => setEquipmentType(null)}
-        className="mb-8 text-blue-500 hover:text-blue-600"
-      >
-        ← Back to Equipment Types
-      </button>
+      <BackButton
+        setEquipmentType={setEquipmentType}
+        text={'Equipment Types'}
+      />
 
       <h2 className="text-lg font-semibold mb-4 text-white">
         Create New Scope

@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 
 import Classes from '../constants/Classes.js';
 import ModifiableParams from '../constants/ModifiableParams.js';
+import ModifiableParamsFirearms from '../constants/ModifiableParamsFirearms.js';
 import MobilityModifiers from '../constants/MobilityModifiers.js';
 import ConcealmentModifier from '../constants/ConcealmentModifier.js';
 import EquipmentModifier from '../constants/EquipmentModifier.js';
 import AttackTypeModifier from '../constants/AttackTypeModifier.js';
+import Ammo from '../constants/Ammo.js';
+import Scopes from '../constants/Scopes.js';
 
 import SingleInput from '../SingleInput.js';
 import GenerateXML from '../GenerateXML.js';
@@ -15,11 +18,14 @@ import Firearms from '../constants/Firearms.js';
 import ClassesChecklist from '../ClassesChecklist.js';
 import ProtectionArc from '../constants/ProtectionArc.js';
 import ProtectionArcChecklist from '../ProtectionArcChecklist.js';
+import Categories from '../constants/Categories.js';
+import BackButton from '../BackButton.js';
 
 const Firearm = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({
-    name: 'Firearm',
-    inventoryBinding: 'Firearm',
+    name: '',
+    type: 'firearm',
+    inventoryBinding: 'PrimaryWeaponMuzzle',
     bindTo: [],
     concealmentModifier: 0,
     mobilityModifiers: [],
@@ -27,6 +33,7 @@ const Firearm = ({ setEquipmentType }) => {
     equipmentModifier: [],
     attackTypeModifier: [],
     protectionArc: [],
+    category: '',
     tooltip: '',
     description: '',
     img: '',
@@ -37,15 +44,14 @@ const Firearm = ({ setEquipmentType }) => {
 
   return (
     <div className="p-8 bg-gray-900">
-      <button
-        onClick={() => setEquipmentType(null)}
-        className="mb-8 text-blue-500 hover:text-blue-600"
-      >
-        ← Back to Equipment Types
-      </button>
+      <BackButton
+        setEquipmentType={setEquipmentType}
+        text={'Equipment Types'}
+      />
 
       <h2 className="text-lg font-semibold mb-4 text-white">
-        Create New Armor
+        Create New Firearm - WORK IN PROGRESS. NOT ALL FEATURES PRESENT AND MAY
+        NOT WORK
       </h2>
       <form className="space-y-4">
         <SingleInput
@@ -79,6 +85,31 @@ const Firearm = ({ setEquipmentType }) => {
             typeStr={'bindTo'}
             setEquipmentForm={setEquipmentForm}
           />
+          {/* Bind to Ammo */}
+          <Checklist
+            title={'Bind to Ammo'}
+            dataArray={Ammo}
+            type={equipmentForm.bindTo}
+            typeStr={'bindTo'}
+            setEquipmentForm={setEquipmentForm}
+          />
+          {/* Bind to Scopes */}
+          <Checklist
+            title={'Bind to Scopes'}
+            dataArray={Scopes}
+            type={equipmentForm.bindTo}
+            typeStr={'bindTo'}
+            setEquipmentForm={setEquipmentForm}
+          />
+
+          {/* Weapon Category */}
+          <Checklist
+            title={'Weapon category'}
+            dataArray={Categories}
+            type={equipmentForm.category}
+            typeStr={'category'}
+            setEquipmentForm={setEquipmentForm}
+          />
 
           {/* Mobility Modifiers */}
           <Checklist
@@ -103,13 +134,19 @@ const Firearm = ({ setEquipmentType }) => {
 
           {/* Modifiable Parameters */}
           <Checklist
-            title={'Modifiable Parameters'}
+            title={'Modifiable Parameters General'}
             dataArray={ModifiableParams}
             type={equipmentForm.modifiableParams}
             typeStr={'modifiableParams'}
             setEquipmentForm={setEquipmentForm}
           />
-
+          <Checklist
+            title={'Modifiable Parameters Firearms'}
+            dataArray={ModifiableParamsFirearms}
+            type={equipmentForm.modifiableParams}
+            typeStr={'modifiableParams'}
+            setEquipmentForm={setEquipmentForm}
+          />
           {/* Equipment Modifier */}
           <Checklist
             title={'Equipment Modifier'}
@@ -125,14 +162,6 @@ const Firearm = ({ setEquipmentType }) => {
             dataArray={AttackTypeModifier}
             type={equipmentForm.attackTypeModifier}
             typeStr={'attackTypeModifier'}
-            setEquipmentForm={setEquipmentForm}
-          />
-
-          {/* Protection Arc */}
-          <ProtectionArcChecklist
-            dataArray={ProtectionArc}
-            type={equipmentForm.protectionArc}
-            equipmentForm={equipmentForm}
             setEquipmentForm={setEquipmentForm}
           />
         </div>

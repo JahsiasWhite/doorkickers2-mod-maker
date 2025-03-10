@@ -15,10 +15,12 @@ import Firearms from '../constants/Firearms.js';
 import ClassesChecklist from '../ClassesChecklist.js';
 import ProtectionArc from '../constants/ProtectionArc.js';
 import ProtectionArcChecklist from '../ProtectionArcChecklist.js';
+import BackButton from '../BackButton.js';
 
 const Armor = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({
     name: '',
+    type: 'armor',
     inventoryBinding: 'Armor',
     bindTo: [],
     concealmentModifier: 0,
@@ -37,12 +39,10 @@ const Armor = ({ setEquipmentType }) => {
 
   return (
     <div className="p-8 bg-gray-900">
-      <button
-        onClick={() => setEquipmentType(null)}
-        className="mb-8 text-blue-500 hover:text-blue-600"
-      >
-        ← Back to Equipment Types
-      </button>
+      <BackButton
+        setEquipmentType={setEquipmentType}
+        text={'Equipment Types'}
+      />
 
       <h2 className="text-lg font-semibold mb-4 text-white">
         Create New Armor

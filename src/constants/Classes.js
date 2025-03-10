@@ -1,7 +1,7 @@
 const Classes = [
   {
     label: 'Rangers',
-    subclasses: ['Assault', 'Support', 'Marksman', 'Grenadier'],
+    subclasses: ['Assault', 'Support', 'Marksman', 'Medic', 'Grenadier'],
   },
   {
     label: 'Nowheraki',

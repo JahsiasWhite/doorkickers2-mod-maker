@@ -2,11 +2,21 @@ import ExportZip from './ExportZIP.js';
 
 const GenerateXML = ({ equipmentForm }) => {
   const generateXML = () => {
+    console.error(equipmentForm);
     if (equipmentForm.inventoryBinding === 'Armor') {
       return generateArmorXML();
     }
-    if (equipmentForm.inventoryBinding === 'Firearm') {
+    if (equipmentForm.type === 'firearm') {
       return generateFirearmXML();
+    }
+    if (equipmentForm.type === 'humanParams') {
+      return generateHumanParamsXML();
+    }
+    if (equipmentForm.type === 'soundRanges') {
+      return generateSoundRangesXML();
+    }
+    if (equipmentForm.type === 'xpTables') {
+      return generateXPTablesXML();
     }
     return generateScopeXML();
   };
@@ -108,6 +118,41 @@ const GenerateXML = ({ equipmentForm }) => {
     return `\n    <ConcealmentModifier add="${equipmentForm.concealmentModifier}"/>`;
   }
 
+  function generateSoundRangesXML() {
+    let xml = '<SoundsRangeMeters\n';
+
+    equipmentForm.soundRanges.forEach((param) => {
+      xml += `\t${param.label}="${param.value}"\n`;
+    });
+
+    xml += '/>';
+    return xml;
+  }
+
+  function generateXPTablesXML() {
+    let xml = '<XPTables>\n';
+    xml += '\t<XPGainTable>\n';
+
+    equipmentForm.xpTables.forEach((param) => {
+      xml += `\t\t<Stat name="${param.label}" xpPerUnit="${param.value}" />\n`;
+    });
+
+    xml += '\t</XPGainTable>\n';
+    xml += '</XPTables>';
+    return xml;
+  }
+
+  function generateHumanParamsXML() {
+    let xml = '<HumanParams\n';
+
+    equipmentForm.humanParams.forEach((param) => {
+      xml += `\t${param.label}="${param.value}"\n`;
+    });
+
+    xml += '/>';
+    return xml;
+  }
+
   function generateArmorXMLContent() {
     let scopeXML = `  <Armor ${
       equipmentForm.unlockCost ? 'unlockCost=' + equipmentForm.unlockCost : ''
@@ -173,7 +218,7 @@ const GenerateXML = ({ equipmentForm }) => {
         category="${equipmentForm.category}"
         tooltip="${equipmentForm.tooltip}"
         description="${equipmentForm.description}"
-        animationSet="${equipmentForm.animationSet}"
+        animationSet="${equipmentForm.category}"
         img="${equipmentForm.img}">`;
 
     // Add RenderObject3D if available
