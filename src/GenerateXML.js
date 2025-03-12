@@ -21,7 +21,7 @@ const GenerateXML = ({ equipmentForm }) => {
       return generateScopeXML();
     }
     if (equipmentForm.type === 'textures') {
-      return 'TODO';
+      return generateTexturesXML();
     }
     console.error(equipmentForm);
     console.error('No type found...');
@@ -271,6 +271,82 @@ const GenerateXML = ({ equipmentForm }) => {
     xml += generateFirearmXMLContent();
 
     xml += '\n</Equipment>';
+    return xml;
+  }
+
+  // Just using rangers background for now...
+  function generateTexturesXML() {
+    const uploadedBgImages = () => {
+      if (equipmentForm.bgImages.length < 2) {
+        return `<Item>
+          <StaticImage origin="0 0">
+            <RenderObject2D texture="${equipmentForm.bgImages[0].bgPath}"/>
+
+            <!-- 'origin' for these is a multiplier for the movement speed of each layer, gets multiplied by #parallax_speed -->
+            <Item name="#parallax_layer_speed" origin="${equipmentForm.bgImages[0].xSpeed} ${equipmentForm.bgImages[0].ySpeed}"/>
+          </StaticImage>
+        </Item>`;
+      }
+
+      let images = '';
+      for (let i = 1; i < equipmentForm.bgImages.length; i++) {
+        images += `
+        <Item>
+            <StaticImage origin="${equipmentForm.bgImages[i].xLoc} ${
+          equipmentForm.bgImages[i].yLoc
+        }">
+              <RenderObject2D texture="data/textures/gui/${
+                equipmentForm.bgImages[i].bgPath
+              }"/>
+              ${
+                equipmentForm.bgImages[i].anim
+                  ? `\n\t\t\t  <ImageAnim type="scroll" speed="${equipmentForm.bgImages[i].animSpeed}" direction="${equipmentForm.bgImages[i].animX} ${equipmentForm.bgImages[i].animY}"/>`
+                  : ''
+              }
+              <!-- 'origin' for these is a multiplier for the movement speed of each layer, gets multiplied by #parallax_speed -->
+              <Item name="#parallax_layer_speed" origin="${
+                equipmentForm.bgImages[i].xSpeed
+              } ${equipmentForm.bgImages[i].ySpeed}"/>
+            </StaticImage>
+          </Item>`;
+      }
+      return images;
+    };
+
+    let xml = `<GUIItems>
+
+  <Item name="Menu_Main_Blurred_Background" hidden="true">
+    <OnOpen>
+      <Action type="MoveToBackground" target="Menu_Main_Blurred_Background"/>
+    </OnOpen>
+
+    <!-- 
+      name is Menu_Main_Background_## , where the game tries to match the unit name as ## 
+        if not found, it will fall back to Rangers
+    -->
+    
+
+  <Item name="Menu_Main_Background_Rangers">
+      <!-- global speed with which the layers move around in their default animation -->
+      <Item name="#parallax_speed" origin="${equipmentForm.parallaxSpeedX} ${
+      equipmentForm.parallaxSpeedY
+    }"/>  <!-- the layers go out of screen in 16:10, no Y movement -->
+      <!--<Item name="#parallax_speed" origin="0.0 0"/>-->
+
+      <!-- multiplier for how much the screen moves with the mouse horizontally/vertically (vertical (y) movement scales the image, while horizontal (x) movement will add on top of the default horizontal animation -->
+      <Item name="#parallax_mouse_scale" origin="${equipmentForm.mouseScaleX} ${
+      equipmentForm.mouseScaleY
+    }"/>
+      <!--<Item name="#parallax_mouse_scale" origin="-1.0 0.003"/>-->
+
+      <Item name="#parallax_elements">
+        ${uploadedBgImages()}
+      </Item>
+    </Item>
+  </Item>
+
+</GUIItems>`;
+
     return xml;
   }
 

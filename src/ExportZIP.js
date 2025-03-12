@@ -38,6 +38,17 @@ const ExportZip = ({ equipmentForm, generateXML }) => {
       zip.file(`gameplay_settings/xp_tables.xml`, generateXML());
     } else if (equipmentForm.type === 'textures') {
       zip.file(`gui/main_menu_background.xml`, generateXML());
+
+      // Add DDS file if uploaded
+      if (equipmentForm.bgImages.length > 1) {
+        for (let i = 1; i < equipmentForm.bgImages.length; i++) {
+          const ddsBlob = await equipmentForm.bgImages[i].bgFile.arrayBuffer();
+          zip.file(
+            `textures/gui/${equipmentForm.bgImages[i].bgFile.name}`,
+            ddsBlob
+          );
+        }
+      }
     } else {
       // Equipment
       zip.file(

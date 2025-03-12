@@ -28,3 +28,4 @@ npm run start
 - add mod image
 - react scan
 - make sure no logs in terminal
+- can I remove postcss.config or tailwind.confg

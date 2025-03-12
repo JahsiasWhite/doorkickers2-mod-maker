@@ -22,11 +22,6 @@ const FileUpload = ({ equipmentForm, setEquipmentForm }) => {
           className="w-full p-2"
           onChange={handleFileUpload}
         />
-        {/* {equipmentForm.ddsFile && (
-          <p className="mt-2 text-sm text-green-600">
-            Uploaded: {equipmentForm.ddsFile.name}
-          </p>
-        )} */}
 
         <input
           type="file"
