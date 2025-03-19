@@ -14,7 +14,7 @@ const FileUpload = ({ equipmentForm, setEquipmentForm }) => {
 
   return (
     <div className="text-gray-300">
-      <label className="block text-sm font-medium mb-1">DDS File</label>
+      <label className="block text-sm font-medium mb-1">Image Icon</label>
       <div className="border rounded">
         <input
           type="file"
