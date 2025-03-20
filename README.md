@@ -20,11 +20,9 @@ npm run start
 
 ## TODO BEFORE PRODUCTION
 
-- delete all console logs
 - new skin
 - rename and new image on tab
 - pictures
 - info
-- see if we can fix the bindTo for scopes
 - add mod image
 - react scan
