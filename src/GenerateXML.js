@@ -23,6 +23,7 @@ const GenerateXML = ({ equipmentForm }) => {
     if (equipmentForm.type === 'textures') {
       return generateTexturesXML();
     }
+
     console.error(equipmentForm);
     console.error('No type found...');
     return 'ERROR: No type found. Please report this bug';
@@ -99,8 +100,6 @@ const GenerateXML = ({ equipmentForm }) => {
   }
 
   function generateProtectionArcXML() {
-    console.error(equipmentForm.protectionArc);
-
     let protectionArcXML = '';
 
     // Check if protectionArc exists and is an array

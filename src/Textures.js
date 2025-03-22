@@ -129,7 +129,7 @@ const Textures = ({ setSelectedOption }) => {
                 checked={equipmentForm.bgImages[index + 1].anim}
                 className="rounded cursor-pointer border-gray-500 bg-transparent"
               />
-              <span>Add Animation?</span>
+              <span>Add Animation</span>
             </div>
             {equipmentForm.bgImages[index + 1].anim && (
               <>

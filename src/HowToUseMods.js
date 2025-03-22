@@ -11,7 +11,7 @@ const HowToUseMods = ({ setSelectedOption }) => {
       <div className="text-xl space-y-6 max-w-3xl mx-auto">
         <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
           <h2 className="text-xl font-semibold text-white">Installing Mods</h2>
-          <p className="text-gray-400 mt-2">
+          <p className="text-gray-400 mt-2 text-balance">
             Once you have created your mod, you can install and play it!
             <br />
             1. Download the ZIP

@@ -32,7 +32,6 @@ const EquipmentForm = ({ setEquipmentType }) => {
     ddsFile: null,
     ddsFileSmall: null,
   });
-  console.error(equipmentForm);
 
   return (
     <div className="p-8 bg-gray-900">

@@ -16,7 +16,7 @@ const ModMaker = () => {
       <div className="max-w-6xl mx-auto py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
           <Card
-            icon={'Crosshair'}
+            icon={'/MenuIcons/equipment.svg'}
             title="Create New Equipment"
             description="Add new weapons, scopes, or items to the game. Customize their attributes and appearance."
             onClick={() => setSelectedOption('equipment')}
@@ -30,21 +30,21 @@ const ModMaker = () => {
           /> */}
 
           <Card
-            icon={'Shield'}
+            icon={'/MenuIcons/gear.svg'}
             title="Edit Game Settings"
             description=""
             onClick={() => setSelectedOption('game')}
           />
 
           <Card
-            icon={'Shield'}
+            icon={'/MenuIcons/wall.svg'}
             title="Edit Textures"
             description=""
             onClick={() => setSelectedOption('textures')}
           />
 
           <Card
-            icon={'Shield'}
+            icon={'/MenuIcons/question.svg'}
             title="How To Use"
             description=""
             onClick={() => setSelectedOption('howto')}

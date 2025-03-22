@@ -92,8 +92,8 @@ const ProtectionArcComponent = ({ equipmentForm, setEquipmentForm }) => {
             <label className="block text-sm font-medium text-gray-300 mb-2">
               Protection Arc {type}
             </label>
-            <div className="grid grid-cols-3 gap-4">
-              <div>
+            <div className="grid grid-cols-2 gap-4">
+              {/* <div>
                 <label className="block text-xs text-gray-400 mb-1">
                   Degrees
                 </label>
@@ -103,7 +103,7 @@ const ProtectionArcComponent = ({ equipmentForm, setEquipmentForm }) => {
                   readOnly
                   className="w-full p-2 border border-gray-600 rounded text-sm bg-gray-800 text-gray-100"
                 />
-              </div>
+              </div> */}
 
               <div>
                 <label className="block text-xs text-gray-400 mb-1">

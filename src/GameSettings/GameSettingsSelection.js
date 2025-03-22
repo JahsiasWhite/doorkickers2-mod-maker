@@ -10,9 +10,9 @@ const GameSettingsSelection = ({ setSelectedOption }) => {
   const [equipmentType, setEquipmentType] = useState(null);
 
   const equipmentTypes = [
-    { name: 'Human Parameters', icon: 'Armor' },
-    { name: 'Sound Ranges', icon: 'Shield' },
-    { name: 'XP Tables', icon: 'Sword' },
+    { name: 'Human Parameters', icon: '/MenuIcons/human_params.svg' },
+    { name: 'Sound Ranges', icon: '/MenuIcons/sound.svg' },
+    { name: 'XP Tables', icon: '/MenuIcons/graph.svg' },
   ];
 
   if (equipmentType) {
@@ -30,7 +30,7 @@ const GameSettingsSelection = ({ setSelectedOption }) => {
     <div className="p-8">
       <BackButton setEquipmentType={setSelectedOption} text={'Main Menu'} />
 
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-3 md:grid-cols-2 gap-8">
         {equipmentTypes.map((type) => (
           <Card
             icon={type.icon}
