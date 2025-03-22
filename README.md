@@ -21,8 +21,5 @@ npm run start
 ## TODO BEFORE PRODUCTION
 
 - new skin
-- rename and new image on tab
-- pictures
 - info
 - add mod image
-- react scan
