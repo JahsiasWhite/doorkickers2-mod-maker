@@ -5,7 +5,7 @@ import EquipmentTypeSelection from './EquipmentTypes/EquipmentTypeSelection.js';
 import GameSettingsSelection from './GameSettings/GameSettingsSelection.js';
 import Card from './Card.js';
 import HowToUseMods from './HowToUseMods.js';
-import Textures from './Textures.js';
+import TextureSelection from './Textures/TextureSelection.js';
 
 const ModMaker = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -59,7 +59,7 @@ const ModMaker = () => {
   } else if (selectedOption === 'game') {
     return <GameSettingsSelection setSelectedOption={setSelectedOption} />;
   } else if (selectedOption === 'textures') {
-    return <Textures setSelectedOption={setSelectedOption} />;
+    return <TextureSelection setSelectedOption={setSelectedOption} />;
   } else if (selectedOption === 'howto') {
     return <HowToUseMods setSelectedOption={setSelectedOption} />;
   }

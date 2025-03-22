@@ -20,6 +20,5 @@ npm run start
 
 ## TODO BEFORE PRODUCTION
 
-- new skin
 - info
 - add mod image
