@@ -11,7 +11,7 @@ const EquipmentTypeSelection = ({ setSelectedOption }) => {
   const [equipmentType, setEquipmentType] = useState(null);
 
   const equipmentTypes = [
-    { name: 'Ammo', icon: '/MenuIcons/scope.svg' },
+    { name: 'Ammo', icon: '/MenuIcons/ammo.svg' },
     { name: 'Armor', icon: '/MenuIcons/shield.svg' },
     { name: 'Firearm - WIP', icon: '/MenuIcons/Gun.svg' },
     { name: 'Scope', icon: '/MenuIcons/scope.svg' },

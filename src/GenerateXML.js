@@ -371,22 +371,35 @@ const GenerateXML = ({ equipmentForm }) => {
         img="${equipmentForm.img}"
         >`;
 
+    console.error(equipmentForm.silenced[0]);
     xml += `\n\n\t\t<!-- defines base ROF and sound of weapon -->
 		<Params roundsPerSecond="${equipmentForm.rps}"
 				audibleSoundRadius="${equipmentForm.soundRadius}"
 				physicsImpactForce="${equipmentForm.impactForce}"${
-      equipmentForm.silenced ? '\n\t\t\t\tsilenced=1' : ''
+      equipmentForm.silenced[0] ? '\n\t\t\t\tsilenced=1' : ''
     }
 				>
 
 			<!-- the damage value is linearly interpolated in the given range, between min/max damage -->
-			<Damage start="40" end="30" startDist="0" endDist="30"/>
+			<Damage start="${equipmentForm.dmgStart}" end="${
+      equipmentForm.dmgEnd
+    }" startDist="${equipmentForm.dmgStartDist}" endDist="${
+      equipmentForm.dmgEndDist
+    }"/>
 
 			<!-- base value, can be modified by AttackType/Abilities/Doctrine/etc. -->
-			<CriticalChancePercent start="45" end="20" startDist="0" endDist="50"/>
+			<CriticalChancePercent start="${equipmentForm.critChanceStart}" end="${
+      equipmentForm.critChanceEnd
+    }" startDist="${equipmentForm.critChanceStartDist}" endDist="${
+      equipmentForm.critChanceEndDist
+    }"/>
 
 			<!-- i.e. divides distance range in (end - start) discrete intervals for AP -->
-			<ArmorPenetration start="30" end="30" startDist="0" endDist="100"/>
+			<ArmorPenetration start="${equipmentForm.armorPenStart}" end="${
+      equipmentForm.armorPenEnd
+    }" startDist="${equipmentForm.armorPenStartDist}" endDist="${
+      equipmentForm.armorPenEndDist
+    }"/>
 		</Params>`;
 
     xml += '\n  </Scope>';
