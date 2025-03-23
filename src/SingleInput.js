@@ -2,7 +2,7 @@ import React from 'react';
 
 const SingleInput = ({ title, value, onChange }) => {
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 break-inside-avoid">
       <label className="block text-sm font-medium text-gray-300">{title}</label>
       <input
         type="text"

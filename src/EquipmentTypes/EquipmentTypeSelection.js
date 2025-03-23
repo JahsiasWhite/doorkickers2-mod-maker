@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Card from '../Card.js';
 
+import Ammo from './Ammo.js';
 import Armor from './Armor.js';
 import Scopes from './Scopes.js';
 import Firearm from './Firearm.js';
@@ -10,17 +11,20 @@ const EquipmentTypeSelection = ({ setSelectedOption }) => {
   const [equipmentType, setEquipmentType] = useState(null);
 
   const equipmentTypes = [
+    { name: 'Ammo', icon: '/MenuIcons/scope.svg' },
     { name: 'Armor', icon: '/MenuIcons/shield.svg' },
-    { name: 'Scope', icon: '/MenuIcons/scope.svg' },
     { name: 'Firearm - WIP', icon: '/MenuIcons/Gun.svg' },
+    { name: 'Scope', icon: '/MenuIcons/scope.svg' },
   ];
 
   if (equipmentType) {
     switch (equipmentType) {
-      case 'Scope':
-        return <Scopes setEquipmentType={setEquipmentType} />;
+      case 'Ammo':
+        return <Ammo setEquipmentType={setEquipmentType} />;
       case 'Armor':
         return <Armor setEquipmentType={setEquipmentType} />;
+      case 'Scope':
+        return <Scopes setEquipmentType={setEquipmentType} />;
       case 'Firearm - WIP':
         return <Firearm setEquipmentType={setEquipmentType} />;
     }
@@ -33,6 +37,7 @@ const EquipmentTypeSelection = ({ setSelectedOption }) => {
       <div className="grid grid-cols-3 md:grid-cols-2 gap-8">
         {equipmentTypes.map((type) => (
           <Card
+            key={type.name}
             icon={type.icon}
             title={type.name}
             onClick={() => setEquipmentType(type.name)}

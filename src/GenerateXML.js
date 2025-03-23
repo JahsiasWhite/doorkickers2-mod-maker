@@ -17,6 +17,9 @@ const GenerateXML = ({ equipmentForm }) => {
     if (equipmentForm.type === 'xpTables') {
       return generateXPTablesXML();
     }
+    if (equipmentForm.type === 'ammo') {
+      return generateAmmoXML();
+    }
     if (equipmentForm.type === 'scope') {
       return generateScopeXML();
     }
@@ -346,6 +349,49 @@ const GenerateXML = ({ equipmentForm }) => {
 
 </GUIItems>`;
 
+    return xml;
+  }
+
+  function generateAmmoXML() {
+    let xml = '<Equipment>\n';
+
+    // xml += generateBindXML();
+    equipmentForm.bindTo.forEach((param) => {
+      xml += `  <Bind eqp="${param}">\n`;
+      xml += `    <to name="${equipmentForm.name}" />\n`;
+      xml += '  </Bind>\n';
+    });
+
+    xml += `  <Ammo ${
+      equipmentForm.unlockCost ? 'unlockCost=' + equipmentForm.unlockCost : ''
+    }
+        name="${equipmentForm.name}" 
+        tooltip="${equipmentForm.tooltip}"
+        description="${equipmentForm.description}"
+        img="${equipmentForm.img}"
+        >`;
+
+    xml += `\n\n\t\t<!-- defines base ROF and sound of weapon -->
+		<Params roundsPerSecond="${equipmentForm.rps}"
+				audibleSoundRadius="${equipmentForm.soundRadius}"
+				physicsImpactForce="${equipmentForm.impactForce}"${
+      equipmentForm.silenced ? '\n\t\t\t\tsilenced=1' : ''
+    }
+				>
+
+			<!-- the damage value is linearly interpolated in the given range, between min/max damage -->
+			<Damage start="40" end="30" startDist="0" endDist="30"/>
+
+			<!-- base value, can be modified by AttackType/Abilities/Doctrine/etc. -->
+			<CriticalChancePercent start="45" end="20" startDist="0" endDist="50"/>
+
+			<!-- i.e. divides distance range in (end - start) discrete intervals for AP -->
+			<ArmorPenetration start="30" end="30" startDist="0" endDist="100"/>
+		</Params>`;
+
+    xml += '\n  </Scope>';
+
+    xml += '\n</Equipment>';
     return xml;
   }
 

@@ -25,6 +25,7 @@ const TextureSelection = ({ setSelectedOption }) => {
       <div className="grid grid-cols-3 md:grid-cols-2 gap-8">
         {equipmentTypes.map((type) => (
           <Card
+            key={type.name}
             icon={type.icon}
             title={type.name}
             onClick={() => setEquipmentType(type.name)}
