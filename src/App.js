@@ -6,6 +6,7 @@ import GameSettingsSelection from './GameSettings/GameSettingsSelection.js';
 import Card from './Card.js';
 import HowToUseMods from './HowToUseMods.js';
 import TextureSelection from './Textures/TextureSelection.js';
+import SoundSelection from './SoundMenu/SoundSelection.js';
 
 const ModMaker = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -44,6 +45,13 @@ const ModMaker = () => {
           />
 
           <Card
+            icon={'/MenuIcons/sound.svg'}
+            title="Edit Sounds"
+            description=""
+            onClick={() => setSelectedOption('sounds')}
+          />
+
+          <Card
             icon={'/MenuIcons/question.svg'}
             title="How To Use"
             description=""
@@ -60,6 +68,8 @@ const ModMaker = () => {
     return <GameSettingsSelection setSelectedOption={setSelectedOption} />;
   } else if (selectedOption === 'textures') {
     return <TextureSelection setSelectedOption={setSelectedOption} />;
+  } else if (selectedOption === 'sounds') {
+    return <SoundSelection setSelectedOption={setSelectedOption} />;
   } else if (selectedOption === 'howto') {
     return <HowToUseMods setSelectedOption={setSelectedOption} />;
   }

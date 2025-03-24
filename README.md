@@ -3,6 +3,7 @@
 Allows for easy creation of
 
 - Equipment
+  - Ammo
   - Armor
   - Scopes
   - Firearms WIP
@@ -22,3 +23,4 @@ npm run start
 
 - info
 - add mod image
+- remove console logs

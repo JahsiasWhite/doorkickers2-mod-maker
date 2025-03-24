@@ -26,6 +26,9 @@ const GenerateXML = ({ equipmentForm }) => {
     if (equipmentForm.type === 'textures') {
       return generateTexturesXML();
     }
+    if (equipmentForm.type === 'soundtrack') {
+      return generateSoundtrackXML();
+    }
 
     console.error(equipmentForm);
     console.error('No type found...');
@@ -273,6 +276,57 @@ const GenerateXML = ({ equipmentForm }) => {
     xml += generateFirearmXMLContent();
 
     xml += '\n</Equipment>';
+    return xml;
+  }
+
+  function generateSoundtrackXML() {
+    let xml = '<Sounds>';
+
+    xml += `
+    <Sound ID="music_main_menu" channel="music" stream="true" preload="true">
+		<Path name="data/sounds/music/${equipmentForm.files.mainMenuMusic.filePath}" />
+	</Sound>`;
+
+    if (equipmentForm.files.soundtracks?.length > 0) {
+      xml += `\n
+    <!-- in case of streamed sounds, 'preload' means that only their headers are parsed, they won't be entirely preloaded -->
+	<Sound ID="music_ingame" channel="music" stream="true" preload="true">`;
+
+      equipmentForm.files.soundtracks.forEach((param) => {
+        xml += `
+        <Path name="data/sounds/music/${param.filePath}"/>`;
+      });
+
+      // <Path name="data/sounds/music/${equipmentForm.files.soundtracks[0]?.filePath}"/>
+      // <Path name="data/sounds/music/${equipmentForm.files.soundtracks[1]?.filePath}"/>
+      // <Path name="data/sounds/music/${equipmentForm.files.soundtracks[2]?.filePath}"/>
+      // <Path name="data/sounds/music/${equipmentForm.files.soundtracks[3]?.filePath}"/>
+      // <Path name="data/sounds/music/${equipmentForm.files.soundtracks[4]?.filePath}"/>
+      // <Path name="data/sounds/music/${equipmentForm.files.soundtracks[5]?.filePath}"/>
+      // <Path name="data/sounds/music/${equipmentForm.files.soundtracks[6]?.filePath}"/>
+      // <Path name="data/sounds/music/${equipmentForm.files.soundtracks[7]?.filePath}"/>
+      // <Path name="data/sounds/music/${equipmentForm.files.soundtracks[8]?.filePath}"/>
+      xml += `
+    </Sound>`;
+    }
+
+    if (equipmentForm.files.winSounds?.length > 0) {
+      xml += `\n
+    <Sound ID="music_win" channel="music" stream="true" preload="true">
+      <Path name="data/sounds/music/${equipmentForm.files.winSounds[0]?.filePath}"/>
+      <Path name="data/sounds/music/${equipmentForm.files.winSounds[0]?.filePath}"/>
+    </Sound>`;
+    }
+
+    if (equipmentForm.files.loseSounds?.length > 0) {
+      xml += `\n
+	<Sound ID="music_fail" channel="music" stream="true" preload="true">
+		<Path name="data/sounds/music/${equipmentForm.files.loseSounds[0]?.filePath}"/>
+		<Path name="data/sounds/music/${equipmentForm.files.loseSounds[0]?.filePath}"/>
+	</Sound>`;
+    }
+
+    xml += '\n</Sounds>';
     return xml;
   }
 

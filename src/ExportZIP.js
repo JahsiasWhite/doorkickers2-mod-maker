@@ -49,6 +49,53 @@ const ExportZip = ({ equipmentForm, generateXML }) => {
           );
         }
       }
+    } else if (equipmentForm.type === 'soundtrack') {
+      zip.file(`sounds/soundtrack_library.xml`, generateXML());
+
+      if (equipmentForm.files.mainMenuMusic) {
+        const ddsBlob =
+          await equipmentForm.files.mainMenuMusic.file.arrayBuffer();
+        zip.file(
+          `sounds/music/${equipmentForm.files.mainMenuMusic.filePath}`,
+          ddsBlob
+        );
+      }
+
+      if (equipmentForm.files.soundtracks?.length > 0) {
+        for (let i = 0; i < equipmentForm.files.soundtracks.length; i++) {
+          const ddsBlob = await equipmentForm.files.soundtracks[
+            i
+          ].file.arrayBuffer();
+          zip.file(
+            `sounds/music/${equipmentForm.files.soundtracks[i].filePath}`,
+            ddsBlob
+          );
+        }
+      }
+
+      if (equipmentForm.files.winSounds?.length > 0) {
+        for (let i = 0; i < equipmentForm.files.winSounds.length; i++) {
+          const ddsBlob = await equipmentForm.files.winSounds[
+            i
+          ].file.arrayBuffer();
+          zip.file(
+            `sounds/music/${equipmentForm.files.winSounds[i].filePath}`,
+            ddsBlob
+          );
+        }
+      }
+
+      if (equipmentForm.files.loseSounds?.length > 0) {
+        for (let i = 0; i < equipmentForm.files.loseSounds.length; i++) {
+          const ddsBlob = await equipmentForm.files.loseSounds[
+            i
+          ].file.arrayBuffer();
+          zip.file(
+            `sounds/music/${equipmentForm.files.loseSounds[i].filePath}`,
+            ddsBlob
+          );
+        }
+      }
     } else {
       // Equipment
       zip.file(

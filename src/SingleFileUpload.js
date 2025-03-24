@@ -1,11 +1,15 @@
-const SingleFileUpload = ({ dirPath = 'data/', onFileUpload }) => {
+const SingleFileUpload = ({
+  dirPath = 'data/',
+  onFileUpload,
+  accept = '.dds,.jpg,.png',
+}) => {
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (
-      file &&
-      (file.name.endsWith('.dds') ||
-        file.name.endsWith('.jpg') ||
-        file.name.endsWith('.png'))
+      file
+      // (file.name.endsWith('.dds') ||
+      //   file.name.endsWith('.jpg') ||
+      //   file.name.endsWith('.png'))
     ) {
       const filePath = `${file.name}`;
       onFileUpload(file, filePath);
@@ -17,7 +21,7 @@ const SingleFileUpload = ({ dirPath = 'data/', onFileUpload }) => {
   return (
     <input
       type="file"
-      accept=".dds,.jpg,.png"
+      accept={accept}
       className="w-full p-2"
       onChange={handleFileUpload}
     />
