@@ -1,19 +1,15 @@
 /**
  * Music has 4 main categories: "music_main_menu", "music_ingame", "music_win", "music_fail"
  * Files must be in .ogg format
+ * music_main_menu can have more than one entry, the selection will be randomized
  * For music_ingame, if only one Path is added, the other default 8 will still run. There is a max of 9 songs
  *
- * TODO: Must all music be added? Can we only add the main menu for example?
  */
 
 import React, { useState } from 'react';
 
-import SoundRangeMeters from '../constants/SoundRangeMeters.js';
-
 import GenerateXML from '../GenerateXML.js';
-import Checklist from '../Checklist.js';
 import BackButton from '../BackButton.js';
-import SingleInput from '../SingleInput.js';
 import SingleFileUpload from '../SingleFileUpload.js';
 
 const Soundtrack = ({ setEquipmentType }) => {
@@ -84,6 +80,10 @@ const Soundtrack = ({ setEquipmentType }) => {
 
       <h2 className="text-lg font-semibold mb-4 text-white">Edit Soundtrack</h2>
       <form className="space-y-4">
+        <div className="mb-4 p-3 bg-green-800 text-white">
+          Only OGG files are accepted
+        </div>
+
         <div className="columns-2">
           <div>
             <label className="block text-sm font-medium text-gray-300">
@@ -96,7 +96,7 @@ const Soundtrack = ({ setEquipmentType }) => {
                 onFileUpload={(file, filePath) =>
                   handleFileUpload(file, filePath)
                 }
-                accept="audio/*"
+                accept=".ogg"
               />
             </div>
           </div>
@@ -110,7 +110,7 @@ const Soundtrack = ({ setEquipmentType }) => {
                 {/* <div key={index} className="flex items-center gap-2"> */}
                 <input
                   type="file"
-                  accept="audio/*"
+                  accept=".ogg"
                   onChange={(e) => handleUpload(e, 'soundtracks', index)}
                   className="w-full p-2"
                 />
@@ -128,7 +128,7 @@ const Soundtrack = ({ setEquipmentType }) => {
                 {/* <div key={index} className="flex items-center gap-2"> */}
                 <input
                   type="file"
-                  accept="audio/*"
+                  accept=".ogg"
                   onChange={(e) => handleUpload(e, 'winSounds', index)}
                   className="w-full p-2"
                 />
@@ -146,7 +146,7 @@ const Soundtrack = ({ setEquipmentType }) => {
                 {/* <div key={index} className="flex items-center gap-2"> */}
                 <input
                   type="file"
-                  accept="audio/*"
+                  accept=".ogg"
                   onChange={(e) => handleUpload(e, 'loseSounds', index)}
                   className="w-full p-2"
                 />
