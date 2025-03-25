@@ -27,22 +27,24 @@ const Soundtrack = ({ setEquipmentType }) => {
   const [winSounds, setWinSounds] = useState(Array(2).fill(null));
   const [loseSounds, setLoseSounds] = useState(Array(2).fill(null));
 
-  const handleFileUpload = (file, filePath) => {
-    setEquipmentForm((prev) => ({
-      ...prev,
-      files: {
-        ...prev.files,
-        mainMenuMusic: {
-          file: file,
-          filePath: filePath,
-        },
-      },
-    }));
-  };
-
-  const handleUpload = (event, type, index) => {
-    const file = event.target.files[0];
+  const handleUpload = (file, type, index) => {
+    // const file = event.target.files[0];
     if (!file) return;
+    const filePath = `${file.name}`;
+
+    if (type === 'mainMenuMusic') {
+      setEquipmentForm((prev) => ({
+        ...prev,
+        files: {
+          ...prev.files,
+          [type]: {
+            file: file,
+            filePath: filePath,
+          },
+        },
+      }));
+      return;
+    }
 
     if (type === 'soundtracks') {
       const updated = [...soundtracks];
@@ -58,7 +60,6 @@ const Soundtrack = ({ setEquipmentType }) => {
       setLoseSounds(updated);
     }
 
-    const filePath = `${file.name}`;
     setEquipmentForm((prev) => ({
       ...prev,
       files: {
@@ -78,7 +79,7 @@ const Soundtrack = ({ setEquipmentType }) => {
     <div className="p-8 bg-gray-900">
       <BackButton setEquipmentType={setEquipmentType} text={'Game Settings'} />
 
-      <h2 className="text-lg font-semibold mb-4 text-white">Edit Soundtrack</h2>
+      <h2 className="text-lg font-semibold mb-4 text-white">Edit Music</h2>
       <form className="space-y-4">
         <div className="mb-4 p-3 bg-green-800 text-white">
           Only OGG files are accepted
@@ -94,7 +95,7 @@ const Soundtrack = ({ setEquipmentType }) => {
               <SingleFileUpload
                 dirPath="data/sounds"
                 onFileUpload={(file, filePath) =>
-                  handleFileUpload(file, filePath)
+                  handleUpload(file, 'mainMenuMusic')
                 }
                 accept=".ogg"
               />
@@ -108,13 +109,20 @@ const Soundtrack = ({ setEquipmentType }) => {
             {soundtracks.map((sound, index) => (
               <div className="w-full mb-2 bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
                 {/* <div key={index} className="flex items-center gap-2"> */}
-                <input
+                {/* <input
                   type="file"
                   accept=".ogg"
                   onChange={(e) => handleUpload(e, 'soundtracks', index)}
                   className="w-full p-2"
+                /> */}
+                <SingleFileUpload
+                  dirPath="data/sounds"
+                  onFileUpload={(file, filePath) =>
+                    handleUpload(file, 'soundtracks', index)
+                  }
+                  accept=".ogg"
                 />
-                {sound && <span>{sound.name}</span>}
+                {/* {sound && <span>{sound.name}</span>} */}
               </div>
             ))}
           </div>
@@ -126,13 +134,20 @@ const Soundtrack = ({ setEquipmentType }) => {
             {winSounds.map((sound, index) => (
               <div className="w-full mb-2 bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
                 {/* <div key={index} className="flex items-center gap-2"> */}
-                <input
+                {/* <input
                   type="file"
                   accept=".ogg"
                   onChange={(e) => handleUpload(e, 'winSounds', index)}
                   className="w-full p-2"
                 />
-                {sound && <span>{sound.name}</span>}
+                {sound && <span>{sound.name}</span>} */}
+                <SingleFileUpload
+                  dirPath="data/sounds"
+                  onFileUpload={(file, filePath) =>
+                    handleUpload(file, 'winSounds', index)
+                  }
+                  accept=".ogg"
+                />
               </div>
             ))}
           </div>
@@ -144,13 +159,20 @@ const Soundtrack = ({ setEquipmentType }) => {
             {loseSounds.map((sound, index) => (
               <div className="w-full mb-2 bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
                 {/* <div key={index} className="flex items-center gap-2"> */}
-                <input
+                {/* <input
                   type="file"
                   accept=".ogg"
                   onChange={(e) => handleUpload(e, 'loseSounds', index)}
                   className="w-full p-2"
                 />
-                {sound && <span>{sound.name}</span>}
+                {sound && <span>{sound.name}</span>} */}
+                <SingleFileUpload
+                  dirPath="data/sounds"
+                  onFileUpload={(file, filePath) =>
+                    handleUpload(file, 'loseSounds', index)
+                  }
+                  accept=".ogg"
+                />
               </div>
             ))}
           </div>

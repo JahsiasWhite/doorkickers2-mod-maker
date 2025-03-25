@@ -5,8 +5,8 @@ Allows for easy creation of
 - Equipment
   - Ammo
   - Armor
-  - Scopes
   - Firearms WIP
+  - Scopes
 - Classes WIP
 - Game Settings
   - Human Parameters
@@ -14,6 +14,7 @@ Allows for easy creation of
   - XP Tables
 - Textures
   - Background Image
+- Music
 
 ## Starting
 
