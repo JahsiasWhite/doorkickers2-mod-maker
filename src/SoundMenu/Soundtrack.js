@@ -82,7 +82,7 @@ const Soundtrack = ({ setEquipmentType }) => {
       <h2 className="text-lg font-semibold mb-4 text-white">Edit Music</h2>
       <form className="space-y-4">
         <div className="mb-4 p-3 bg-green-800 text-white">
-          Only OGG files are accepted
+          Only .ogg files are accepted
         </div>
 
         <div className="columns-2">

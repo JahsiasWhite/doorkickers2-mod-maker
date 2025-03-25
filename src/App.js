@@ -36,20 +36,20 @@ const ModMaker = () => {
           <Card
             icon={'/MenuIcons/gear.svg'}
             title="Edit Game Settings"
-            description=""
+            description="Update human parameters, sound ranges, or xp tables."
             onClick={() => setSelectedOption('game')}
           />
 
           <Card
             icon={'/MenuIcons/wall.svg'}
             title="Edit Textures"
-            description=""
+            description="Add new main menu backgrounds"
             onClick={() => setSelectedOption('textures')}
           />
 
           <Card
             icon={'/MenuIcons/sound.svg'}
-            title="Edit Sounds"
+            title="Edit Audio"
             description=""
             onClick={() => setSelectedOption('sounds')}
           />
