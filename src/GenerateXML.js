@@ -427,7 +427,6 @@ const GenerateXML = ({ equipmentForm }) => {
         img="${equipmentForm.img}"
         >`;
 
-    console.error(equipmentForm.silenced[0]);
     xml += `\n\n\t\t<!-- defines base ROF and sound of weapon -->
 		<Params roundsPerSecond="${equipmentForm.rps}"
 				audibleSoundRadius="${equipmentForm.soundRadius}"

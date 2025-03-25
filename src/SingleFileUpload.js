@@ -22,7 +22,8 @@ const SingleFileUpload = ({
     <input
       type="file"
       accept={accept}
-      className="w-full p-2"
+      // className="w-full p-2"
+      className="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:py-2 file:px-4 file:text-sm file:font-semibold hover:file:bg-indigo-100"
       onChange={handleFileUpload}
     />
   );

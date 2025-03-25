@@ -19,8 +19,7 @@ Allows for easy creation of
 
 npm run start
 
-## TODO BEFORE PRODUCTION
+## TODO
 
 - info
-- add mod image
-- remove console logs
+- error checking
