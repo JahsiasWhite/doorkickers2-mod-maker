@@ -166,7 +166,7 @@ const ExportZip = ({ equipmentForm, generateXML }) => {
       const url = URL.createObjectURL(content);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${equipmentForm.type}_mod.zip`;
+      a.download = `${modDetails.title}_mod.zip`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
