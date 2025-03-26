@@ -172,8 +172,12 @@ const GenerateXML = ({ equipmentForm }) => {
         name="${equipmentForm.name}" 
         inventoryBinding="${equipmentForm.inventoryBinding}"
         tooltip="${equipmentForm.tooltip}"
-        description="${equipmentForm.description}"
-        img="${equipmentForm.img}">`;
+        description="${equipmentForm.description}"`;
+
+    if (equipmentForm.ddsFile?.name) {
+      scopeXML += `\n\t\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
+    }
+    scopeXML += `>`;
 
     // Add RenderObject3D if available
     if (equipmentForm.renderObject3D) {
@@ -230,8 +234,12 @@ const GenerateXML = ({ equipmentForm }) => {
         category="${equipmentForm.category}"
         tooltip="${equipmentForm.tooltip}"
         description="${equipmentForm.description}"
-        animationSet="${equipmentForm.category}"
-        img="${equipmentForm.img}">`;
+        animationSet="${equipmentForm.category}"`;
+
+    if (equipmentForm.ddsFile?.name) {
+      scopeXML += `\n\t\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
+    }
+    scopeXML += `>`;
 
     // Add RenderObject3D if available
     if (equipmentForm.renderObject3D) {
@@ -423,9 +431,12 @@ const GenerateXML = ({ equipmentForm }) => {
     }
         name="${equipmentForm.name}" 
         tooltip="${equipmentForm.tooltip}"
-        description="${equipmentForm.description}"
-        img="${equipmentForm.img}"
-        >`;
+        description="${equipmentForm.description}"`;
+
+    if (equipmentForm.ddsFile?.name) {
+      xml += `\n\t\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
+    }
+    xml += `>`;
 
     xml += `\n\n\t\t<!-- defines base ROF and sound of weapon -->
 		<Params roundsPerSecond="${equipmentForm.rps}"
@@ -479,10 +490,12 @@ const GenerateXML = ({ equipmentForm }) => {
         name="${equipmentForm.name}" 
         inventoryBinding="${equipmentForm.inventoryBinding}"
         tooltip="${equipmentForm.tooltip}"
-        description="${equipmentForm.description}"
-        img="${equipmentForm.img}"
-        >`;
-    // category
+        description="${equipmentForm.description}"`;
+
+    if (equipmentForm.ddsFile?.name) {
+      xml += `\n\t\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
+    }
+    xml += `>`;
 
     if (equipmentForm.renderObject3D) {
       xml += `\n\n    <RenderObject3D model="${equipmentForm.renderObject3D.model}" attachSlot="${equipmentForm.renderObject3D.attachSlot}" skipGOSSA0="true" diffuseText="${equipmentForm.renderObject3D.diffuseText}"/>`;

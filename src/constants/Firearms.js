@@ -1,6 +1,4 @@
-// const Firearms = ['MP5A', 'MP5SD', 'M16A4', 'M9 Pistol'];
-
-const Firearms = [
+export const FirearmsCIA = [
   'PM63 CIA',
   'PM63 Fergie',
   'Mini Uzi CIA',
@@ -41,6 +39,9 @@ const Firearms = [
   'M110A1 CIA BOps',
   'M110A1Sup CIA BOps',
   'Sawnoff CIA',
+];
+
+export const FirearmsEnemy = [
   'Type 56',
   'AKM Blackhead',
   'AKM Insurgent',
@@ -91,6 +92,9 @@ const Firearms = [
   'M18 Pistol Security',
   'MP7 Holo',
   'Bren 2 Short FA Storm',
+];
+
+export const FirearmsNWS = [
   'Mini Uzi NWS',
   'Mini Uzi Pistol NWS',
   'AKM GL NWS',
@@ -116,6 +120,9 @@ const Firearms = [
   'M249 NWS',
   'SVD NWS',
   'SVU NWS',
+];
+
+export const FirearmsPistols = [
   'M9 Pistol',
   'M9Sup Pistol',
   'M17 Pistol',
@@ -148,6 +155,9 @@ const Firearms = [
   'HS45 Pistol Asset',
   'M9 Pistol NWS Militia',
   'G17 Pistol NWS Militia',
+];
+
+export const FirearmsRifles = [
   'M500PP',
   'M1014',
   'MP5A',
@@ -191,10 +201,14 @@ const Firearms = [
   'MK17STD EGLM Sup',
   'Breacher Shotgun',
   'SniperRifle',
+];
+
+export const FirearmsSpecial = [
   'M4 ACOG Tango',
   'Mini Uzi SUP Tango',
   'Alpha AK Spectre Sup Tango',
   'Cruiser Shotgun',
 ];
 
-export default Firearms;
+// export FirearmsCIA + firearmsCIA
+// export default {FirearmsCIA FirearmsEnemy};

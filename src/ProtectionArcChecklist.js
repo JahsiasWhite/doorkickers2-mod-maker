@@ -83,7 +83,7 @@ const ProtectionArcComponent = ({ equipmentForm, setEquipmentForm }) => {
 
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-300 mb-2">
+      <label className="block pt-3 text-sm font-medium text-gray-300 mb-2">
         Protection Arc
       </label>
       {arcTypes.map(({ type, degrees }) => (

@@ -56,7 +56,9 @@ const ClassesChecklist = ({
 
   return (
     <div style={{ overflow: 'auto' }}>
-      <label className="block text-sm font-medium text-gray-300">{title}</label>
+      <label className="block text-sm font-medium text-gray-300 pt-3 pb-2">
+        {title}
+      </label>
       <div className="w-full p-2 border-gray-600 rounded-lg overflow-y-auto text-gray-100 bg-gray-700">
         {dataArray.map((item) => (
           <div key={item.label} className="space-y-2">

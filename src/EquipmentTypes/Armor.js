@@ -16,6 +16,7 @@ import ClassesChecklist from '../ClassesChecklist.js';
 import ProtectionArc from '../constants/ProtectionArc.js';
 import ProtectionArcChecklist from '../ProtectionArcChecklist.js';
 import BackButton from '../BackButton.js';
+import SingleFileUpload from '../SingleFileUpload.js';
 
 const Armor = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({
@@ -34,7 +35,6 @@ const Armor = ({ setEquipmentType }) => {
     img: '',
     unlockCost: '',
     ddsFile: null,
-    ddsFileSmall: null,
   });
 
   return (
@@ -138,10 +138,23 @@ const Armor = ({ setEquipmentType }) => {
         </div>
 
         {/* DDS File Upload */}
-        <FileUpload
-          equipmentForm={equipmentForm}
-          setEquipmentForm={setEquipmentForm}
-        />
+        <div>
+          <label
+            style={{ paddingLeft: '.5rem' }}
+            className="block text-sm font-medium mb-1 text-gray-300"
+          >
+            Image Icon
+          </label>
+          <SingleFileUpload
+            onFileUpload={(file, filePath) =>
+              setEquipmentForm({
+                ...equipmentForm,
+                ddsFile: file,
+              })
+            }
+            accept=".dds"
+          />
+        </div>
 
         {/* XML Preview */}
         <GenerateXML equipmentForm={equipmentForm} />

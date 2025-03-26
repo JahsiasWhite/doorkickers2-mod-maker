@@ -4,7 +4,6 @@ import Classes from '../constants/Classes.js';
 import ModifiableParams from '../constants/ModifiableParams.js';
 import ModifiableParamsFirearms from '../constants/ModifiableParamsFirearms.js';
 import MobilityModifiers from '../constants/MobilityModifiers.js';
-import ConcealmentModifier from '../constants/ConcealmentModifier.js';
 import EquipmentModifier from '../constants/EquipmentModifier.js';
 import AttackTypeModifier from '../constants/AttackTypeModifier.js';
 import Ammo from '../constants/Ammo.js';
@@ -14,10 +13,7 @@ import SingleInput from '../SingleInput.js';
 import GenerateXML from '../GenerateXML.js';
 import Checklist from '../Checklist.js';
 import FileUpload from '../FileUpload.js';
-import Firearms from '../constants/Firearms.js';
 import ClassesChecklist from '../ClassesChecklist.js';
-import ProtectionArc from '../constants/ProtectionArc.js';
-import ProtectionArcChecklist from '../ProtectionArcChecklist.js';
 import Categories from '../constants/Categories.js';
 import BackButton from '../BackButton.js';
 

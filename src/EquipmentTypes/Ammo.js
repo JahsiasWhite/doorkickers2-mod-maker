@@ -4,8 +4,8 @@ import SingleInput from '../SingleInput.js';
 import GenerateXML from '../GenerateXML.js';
 import Checklist from '../Checklist.js';
 import FileUpload from '../FileUpload.js';
-import Firearms from '../constants/Firearms.js';
 import BackButton from '../BackButton.js';
+import FirearmsDisplay from '../Components/FirearmsDisplay.js';
 
 const Ammo = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({
@@ -64,16 +64,13 @@ const Ammo = ({ setEquipmentType }) => {
           }
         />
 
-        <div className="columns-2">
-          {/* Bind to Firearms */}
-          <Checklist
-            title={'Bind to Firearms'}
-            dataArray={Firearms}
-            type={equipmentForm.bindTo}
-            typeStr={'bindTo'}
-            setEquipmentForm={setEquipmentForm}
-          />
+        {/* Bind to Firearms */}
+        <FirearmsDisplay
+          equipmentForm={equipmentForm}
+          setEquipmentForm={setEquipmentForm}
+        />
 
+        <div className="columns-2">
           <SingleInput
             title={'Rounds Per Second'}
             value={equipmentForm.rps}
