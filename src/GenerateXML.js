@@ -169,15 +169,15 @@ const GenerateXML = ({ equipmentForm }) => {
     let scopeXML = `  <Armor ${
       equipmentForm.unlockCost ? 'unlockCost=' + equipmentForm.unlockCost : ''
     }
-        name="${equipmentForm.name}" 
-        inventoryBinding="${equipmentForm.inventoryBinding}"
-        tooltip="${equipmentForm.tooltip}"
-        description="${equipmentForm.description}"`;
+    name="${equipmentForm.name}" 
+    inventoryBinding="${equipmentForm.inventoryBinding}"
+    tooltip="${equipmentForm.tooltip}"
+    description="${equipmentForm.description}"`;
 
     if (equipmentForm.ddsFile?.name) {
-      scopeXML += `\n\t\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
+      scopeXML += `\n\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
     }
-    scopeXML += `>`;
+    scopeXML += `\n  >\n`;
 
     // Add RenderObject3D if available
     if (equipmentForm.renderObject3D) {
@@ -229,17 +229,17 @@ const GenerateXML = ({ equipmentForm }) => {
     let scopeXML = `  <Firearm ${
       equipmentForm.unlockCost ? 'unlockCost=' + equipmentForm.unlockCost : ''
     }
-        name="${equipmentForm.name}" 
-        inventoryBinding="${equipmentForm.inventoryBinding}"
-        category="${equipmentForm.category}"
-        tooltip="${equipmentForm.tooltip}"
-        description="${equipmentForm.description}"
-        animationSet="${equipmentForm.category}"`;
+    name="${equipmentForm.name}" 
+    inventoryBinding="${equipmentForm.inventoryBinding}"
+    category="${equipmentForm.category}"
+    tooltip="${equipmentForm.tooltip}"
+    description="${equipmentForm.description}"
+    animationSet="${equipmentForm.category}"`;
 
     if (equipmentForm.ddsFile?.name) {
-      scopeXML += `\n\t\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
+      scopeXML += `\n\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
     }
-    scopeXML += `>`;
+    scopeXML += `\n  >\n`;
 
     // Add RenderObject3D if available
     if (equipmentForm.renderObject3D) {
@@ -429,16 +429,16 @@ const GenerateXML = ({ equipmentForm }) => {
     xml += `  <Ammo ${
       equipmentForm.unlockCost ? 'unlockCost=' + equipmentForm.unlockCost : ''
     }
-        name="${equipmentForm.name}" 
-        tooltip="${equipmentForm.tooltip}"
-        description="${equipmentForm.description}"`;
+    name="${equipmentForm.name}" 
+    tooltip="${equipmentForm.tooltip}"
+    description="${equipmentForm.description}"`;
 
     if (equipmentForm.ddsFile?.name) {
-      xml += `\n\t\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
+      xml += `\n\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
     }
-    xml += `>`;
+    xml += `\n  >\n`;
 
-    xml += `\n\n\t\t<!-- defines base ROF and sound of weapon -->
+    xml += `\t\t<!-- defines base ROF and sound of weapon -->
 		<Params roundsPerSecond="${equipmentForm.rps}"
 				audibleSoundRadius="${equipmentForm.soundRadius}"
 				physicsImpactForce="${equipmentForm.impactForce}"${
@@ -487,15 +487,15 @@ const GenerateXML = ({ equipmentForm }) => {
     xml += `  <Scope ${
       equipmentForm.unlockCost ? 'unlockCost=' + equipmentForm.unlockCost : ''
     }
-        name="${equipmentForm.name}" 
-        inventoryBinding="${equipmentForm.inventoryBinding}"
-        tooltip="${equipmentForm.tooltip}"
-        description="${equipmentForm.description}"`;
+    name="${equipmentForm.name}" 
+    inventoryBinding="${equipmentForm.inventoryBinding}"
+    tooltip="${equipmentForm.tooltip}"
+    description="${equipmentForm.description}"`;
 
     if (equipmentForm.ddsFile?.name) {
-      xml += `\n\t\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
+      xml += `\n\timg="data/models/weapons/attachments/${equipmentForm.ddsFile.name}"`;
     }
-    xml += `>`;
+    xml += `\n  >\n`;
 
     if (equipmentForm.renderObject3D) {
       xml += `\n\n    <RenderObject3D model="${equipmentForm.renderObject3D.model}" attachSlot="${equipmentForm.renderObject3D.attachSlot}" skipGOSSA0="true" diffuseText="${equipmentForm.renderObject3D.diffuseText}"/>`;
