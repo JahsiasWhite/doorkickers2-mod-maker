@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
-// import { Plus, Shield, Crosshair } from 'lucide-react';
-import EquipmentTypeSelection from './EquipmentTypes/EquipmentTypeSelection.js';
-import GameSettingsSelection from './GameSettings/GameSettingsSelection.js';
+import EquipmentTypeSelection from './EquipmentMenu/EquipmentTypeSelection.js';
+import GameSettingsSelection from './GameSettingsMenu/GameSettingsSelection.js';
 import Card from './Card.js';
 import HowToUseMods from './HowToUseMods.js';
-import TextureSelection from './Textures/TextureSelection.js';
+import TextureSelection from './TextureMenu/TextureSelection.js';
 import SoundSelection from './SoundMenu/SoundSelection.js';
 
 const ModMaker = () => {
