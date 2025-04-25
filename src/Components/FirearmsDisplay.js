@@ -1,4 +1,4 @@
-import Checklist from '../Checklist';
+import Checklist from './Checklist.js';
 import {
   FirearmsCIA,
   FirearmsEnemy,

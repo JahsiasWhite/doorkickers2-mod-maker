@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Card from '../Card.js';
+import Card from '../components/Card.js';
 
 import Textures from './Textures.js';
-import BackButton from '../BackButton.js';
+import BackButton from '../components/BackButton.js';
 
 const TextureSelection = ({ setSelectedOption }) => {
   const [equipmentType, setEquipmentType] = useState(null);

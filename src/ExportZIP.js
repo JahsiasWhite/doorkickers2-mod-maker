@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import JSZip from 'jszip';
-import SingleInput from './SingleInput';
-import SingleFileUpload from './SingleFileUpload';
+import SingleInput from './components/SingleInput.js';
+import SingleFileUpload from './components/SingleFileUpload.js';
 
 const ExportZip = ({ equipmentForm, generateXML }) => {
   const [modDetails, setModDetails] = useState({

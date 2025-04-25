@@ -10,14 +10,14 @@ import Ammo from '../constants/Ammo.js';
 import Scopes from '../constants/Scopes.js';
 import FirearmParams from '../constants/FirearmParams.js';
 
-import SingleInput from '../SingleInput.js';
+import SingleInput from '../components/SingleInput.js';
 import GenerateXML from '../GenerateXML.js';
-import Checklist from '../Checklist.js';
-import FileUpload from '../FileUpload.js';
-import ClassesChecklist from '../ClassesChecklist.js';
+import Checklist from '../components/Checklist.js';
+import FileUpload from '../components/FileUpload.js';
+import ClassesChecklist from '../components/ClassesChecklist.js';
 import Categories from '../constants/Categories.js';
-import BackButton from '../BackButton.js';
-import SingleFileUpload from '../SingleFileUpload.js';
+import BackButton from '../components/BackButton.js';
+import SingleFileUpload from '../components/SingleFileUpload.js';
 
 const Firearm = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({

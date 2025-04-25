@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Card from '../Card.js';
+import Card from '../components/Card.js';
 import Soundtrack from './Soundtrack.js';
-import BackButton from '../BackButton.js';
+import BackButton from '../components/BackButton.js';
 
 const SoundSelection = ({ setSelectedOption }) => {
   const [equipmentType, setEquipmentType] = useState(null);

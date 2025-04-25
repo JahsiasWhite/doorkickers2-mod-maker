@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Card from '../Card.js';
+import Card from '../components/Card.js';
 
 import Ammo from './Ammo.js';
 import Armor from './Armor.js';
 import Scopes from './Scopes.js';
 import Firearm from './Firearm.js';
-import BackButton from '../BackButton.js';
+import BackButton from '../components/BackButton.js';
 
 const EquipmentTypeSelection = ({ setSelectedOption }) => {
   const [equipmentType, setEquipmentType] = useState(null);

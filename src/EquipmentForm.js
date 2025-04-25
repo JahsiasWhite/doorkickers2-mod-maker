@@ -1,3 +1,5 @@
+// TODO: This file is unused, remove it
+
 import React, { useState } from 'react';
 
 const EquipmentForm = ({ equipmentType, setEquipmentType }) => {

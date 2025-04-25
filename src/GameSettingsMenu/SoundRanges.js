@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import SoundRangeMeters from '../constants/SoundRangeMeters.js';
 
 import GenerateXML from '../GenerateXML.js';
-import Checklist from '../Checklist.js';
-import BackButton from '../BackButton.js';
+import Checklist from '../components/Checklist.js';
+import BackButton from '../components/BackButton.js';
 
 const SoundRanges = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({

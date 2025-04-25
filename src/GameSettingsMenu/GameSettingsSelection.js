@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Card from '../Card.js';
+import Card from '../components/Card.js';
 
 import HumanParams from './HumanParams.js';
-import BackButton from '../BackButton.js';
+import BackButton from '../components/BackButton.js';
 import SoundRanges from './SoundRanges.js';
 import XPTables from './XPTables.js';
 

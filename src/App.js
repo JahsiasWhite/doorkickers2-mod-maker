@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import EquipmentTypeSelection from './EquipmentMenu/EquipmentTypeSelection.js';
 import GameSettingsSelection from './GameSettingsMenu/GameSettingsSelection.js';
-import Card from './Card.js';
+import Card from './components/Card.js';
 import HowToUseMods from './HowToUseMods.js';
 import TextureSelection from './TextureMenu/TextureSelection.js';
 import SoundSelection from './SoundMenu/SoundSelection.js';

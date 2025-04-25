@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import GenerateXML from '../GenerateXML.js';
-import BackButton from '../BackButton.js';
-import SingleFileUpload from '../SingleFileUpload.js';
-import Slider from '../Slider.js';
-import SingleChecklist from '../SingleChecklist.js';
+import BackButton from '../components/BackButton.js';
+import SingleFileUpload from '../components/SingleFileUpload.js';
+import Slider from '../components/Slider.js';
+import SingleChecklist from '../components/SingleChecklist.js';
 
 const Textures = ({ setSelectedOption, setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({

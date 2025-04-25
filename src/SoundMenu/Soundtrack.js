@@ -9,8 +9,8 @@
 import React, { useState } from 'react';
 
 import GenerateXML from '../GenerateXML.js';
-import BackButton from '../BackButton.js';
-import SingleFileUpload from '../SingleFileUpload.js';
+import BackButton from '../components/BackButton.js';
+import SingleFileUpload from '../components/SingleFileUpload.js';
 
 const Soundtrack = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({

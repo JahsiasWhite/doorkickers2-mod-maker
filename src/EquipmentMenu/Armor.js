@@ -7,16 +7,16 @@ import ConcealmentModifier from '../constants/ConcealmentModifier.js';
 import EquipmentModifier from '../constants/EquipmentModifier.js';
 import AttackTypeModifier from '../constants/AttackTypeModifier.js';
 
-import SingleInput from '../SingleInput.js';
+import SingleInput from '../components/SingleInput.js';
 import GenerateXML from '../GenerateXML.js';
-import Checklist from '../Checklist.js';
-import FileUpload from '../FileUpload.js';
+import Checklist from '../components/Checklist.js';
+import FileUpload from '../components/FileUpload.js';
 import Firearms from '../constants/Firearms.js';
-import ClassesChecklist from '../ClassesChecklist.js';
+import ClassesChecklist from '../components/ClassesChecklist.js';
 import ProtectionArc from '../constants/ProtectionArc.js';
-import ProtectionArcChecklist from '../ProtectionArcChecklist.js';
-import BackButton from '../BackButton.js';
-import SingleFileUpload from '../SingleFileUpload.js';
+import ProtectionArcChecklist from '../components/ProtectionArcChecklist.js';
+import BackButton from '../components/BackButton.js';
+import SingleFileUpload from '../components/SingleFileUpload.js';
 
 const Armor = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import SingleInput from '../SingleInput.js';
+import SingleInput from '../components/SingleInput.js';
 import GenerateXML from '../GenerateXML.js';
-import Checklist from '../Checklist.js';
-import FileUpload from '../FileUpload.js';
-import BackButton from '../BackButton.js';
-import FirearmsDisplay from '../Components/FirearmsDisplay.js';
+import Checklist from '../components/Checklist.js';
+import FileUpload from '../components/FileUpload.js';
+import BackButton from '../components/BackButton.js';
+import FirearmsDisplay from '../components/FirearmsDisplay.js';
 
 const Ammo = ({ setEquipmentType }) => {
   const [equipmentForm, setEquipmentForm] = useState({
