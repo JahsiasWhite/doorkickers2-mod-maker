@@ -47,7 +47,7 @@ const GenerateXML = ({ equipmentForm }) => {
   }
 
   function generateMobilityModifiersXML() {
-    let mobilityModifiersXML = `\n    <MobilityModifiers `;
+    let mobilityModifiersXML = `    <MobilityModifiers `;
     equipmentForm.mobilityModifiers.forEach((param) => {
       mobilityModifiersXML += `${param.label}="${param.value}" `;
     });
@@ -225,6 +225,13 @@ const GenerateXML = ({ equipmentForm }) => {
     return xml;
   }
 
+  function generateRenderObject3DXML() {
+    // <RenderObject3D model="data/models/weapons/urg_i.khm" attachSlot="prop_front_rifle" skipGOSSAO="true" diffuseTex="data/models/weapons/urg_i.dds"/>
+    console.error(equipmentForm);
+    let renderObject3DXML = `\n    <RenderObject3D model="data/models/weapons/${equipmentForm.model3D?.name}" attachSlot="prop_front_rifle" skipGOSSAO="true" diffuseTex="data/models/weapons/${equipmentForm.model3DTexture?.name}"/>\n`;
+    return renderObject3DXML;
+  }
+
   function generateFirearmXMLContent() {
     let scopeXML = `  <Firearm ${
       equipmentForm.unlockCost ? 'unlockCost=' + equipmentForm.unlockCost : ''
@@ -242,8 +249,8 @@ const GenerateXML = ({ equipmentForm }) => {
     scopeXML += `\n  >\n`;
 
     // Add RenderObject3D if available
-    if (equipmentForm.renderObject3D) {
-      // scopeXML += generateRenderObject3DXML();
+    if (equipmentForm.model3D) {
+      scopeXML += generateRenderObject3DXML();
     }
 
     // Add MobilityModifiers if available
@@ -262,23 +269,85 @@ const GenerateXML = ({ equipmentForm }) => {
     }
 
     // Add Equipment or AttackType Modifiers if available
-    if (
-      equipmentForm.equipmentModifier?.length > 0 ||
-      equipmentForm.attackTypeModifier?.length > 0 ||
-      equipmentForm.protectionArc?.length > 0
-    ) {
-      scopeXML += generateParamsXML();
+    if (equipmentForm.params?.length > 0) {
+      scopeXML += generateFirearmParamsXML();
     }
+
+    // TODO: Hardcoding for now - AttackTypes, MuzzleFlash, Sounds
+    scopeXML += `\n
+    <AttackTypes>
+      <AttackType name="Rangers_URGICarbineAutoFire" rangeMeters="6" disabled="true"/>
+      <AttackType name="Rangers_RapidFire" rangeMeters="7"/>		
+      <AttackType name="Rangers_UnregBurstFire" rangeMeters="7" disabled="true"/>
+      <AttackType name="Rangers_UnregBurstFireMed" rangeMeters="17" disabled="true"/>
+      <AttackType name="Rangers_URGIRapidFireMed" rangeMeters="20"/>
+      <AttackType name="Rangers_URGICarbineAimedFire" rangeMeters="40"/>
+      <AttackType name="Rangers_CarbineAimedFireXX" rangeMeters="9999"/>
+    </AttackTypes>
+		
+    <MuzzleFlash lightTemplate="ShotLightSmall" tracerTemplate="Tracer_Rifle">
+      <Flare particles="FX_MUZZLE_FLASH_RIFLE_05" />
+      <Flare particles="FX_MUZZLE_FLASH_RIFLE_06" />
+      <Flare particles="FX_MUZZLE_FLASH_RIFLE_07" />
+      <Flare particles="FX_MUZZLE_FLASH_RIFLE_08" />
+    </MuzzleFlash>
+
+    <Sounds> 
+      <Equip name="rifle_eqp"/>
+      <Unequip name="rifle_neqp"/>
+      <Reload name="rifle_reld"/>
+      <ReloadEmpty name="rifle_reldempt"/>
+      <Fire name="m4sup_fire"/>
+      <ShellDrop name="rifle_shell_drop"/>
+      <Empty name="gen_empty"/>
+    </Sounds>`;
 
     scopeXML += '\n  </Firearm>';
     return scopeXML;
+  }
+
+  function generateFirearmParamsXML() {
+    let xml = '\t<Params\n';
+
+    console.error(equipmentForm.params);
+    equipmentForm.params.forEach((param) => {
+      xml += `\t    ${param.label}="${param.value}" />\n`;
+    });
+
+    xml += '\t/>';
+    return xml;
   }
 
   function generateFirearmXML() {
     let xml = '<Equipment>\n';
 
     // Generate Bind section
-    xml += generateBindXML();
+    let bindXML = '';
+    bindXML += `  <Bind eqp="${equipmentForm.name}">\n`;
+    equipmentForm.bindToClasses.forEach((param) => {
+      bindXML += `    <to name="${param}" />\n`;
+    });
+    bindXML +=
+      (equipmentForm.bindToClasses.length > 0) &
+      (equipmentForm.bindToAmmo.length > 0)
+        ? '\n'
+        : '';
+
+    equipmentForm.bindToAmmo.forEach((param) => {
+      bindXML += `    <to name="${param}" />\n`;
+    });
+    bindXML +=
+      (equipmentForm.bindToAmmo.length > 0) &
+      (equipmentForm.bindToScopes.length > 0)
+        ? '\n'
+        : '';
+
+    equipmentForm.bindToScopes.forEach((param) => {
+      bindXML += `    <to name="${param}" />\n`;
+    });
+    bindXML += '  </Bind>\n';
+    xml += bindXML;
+    // xml += generateBindXML();
 
     // Generate Scope section
     xml += generateFirearmXMLContent();

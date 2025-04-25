@@ -159,6 +159,20 @@ const ExportZip = ({ equipmentForm, generateXML }) => {
           ddsBlob
         );
       }
+
+      if (equipmentForm.model3D) {
+        const model3D = await equipmentForm.model3D.arrayBuffer();
+        zip.file(`models/weapons/${equipmentForm.model3D.name}`, model3D);
+
+        if (equipmentForm.model3DTexture) {
+          const model3DTexture =
+            await equipmentForm.model3DTexture.arrayBuffer();
+          zip.file(
+            `models/weapons/${equipmentForm.model3DTexture.name}`,
+            model3DTexture
+          );
+        }
+      }
     }
 
     // Generate ZIP and trigger download
