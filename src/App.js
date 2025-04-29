@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import './App.css';
 import EquipmentTypeSelection from './EquipmentMenu/EquipmentTypeSelection.js';
 import GameSettingsSelection from './GameSettingsMenu/GameSettingsSelection.js';
@@ -6,6 +6,9 @@ import Card from './components/Card.js';
 import HowToUseMods from './HowToUseMods.js';
 import TextureSelection from './TextureMenu/TextureSelection.js';
 import SoundSelection from './SoundMenu/SoundSelection.js';
+
+// Lazy load the KHMConverter component to avoid downloading THREE.js until needed
+const KHMConverter = React.lazy(() => import('./KHMConverter/KHMConverter.js'));
 
 const ModMaker = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -54,6 +57,13 @@ const ModMaker = () => {
           />
 
           <Card
+            icon={'/MenuIcons/convert.svg'}
+            title="KHM Converter - WIP"
+            description=""
+            onClick={() => setSelectedOption('khm-converter')}
+          />
+
+          <Card
             icon={'/MenuIcons/question.svg'}
             title="How To Use"
             description=""
@@ -72,6 +82,12 @@ const ModMaker = () => {
     return <TextureSelection setSelectedOption={setSelectedOption} />;
   } else if (selectedOption === 'sounds') {
     return <SoundSelection setSelectedOption={setSelectedOption} />;
+  } else if (selectedOption === 'khm-converter') {
+    return (
+      <Suspense fallback={<div>Loading 3D viewer...</div>}>
+        <KHMConverter setSelectedOption={setSelectedOption} />
+      </Suspense>
+    );
   } else if (selectedOption === 'howto') {
     return <HowToUseMods setSelectedOption={setSelectedOption} />;
   }

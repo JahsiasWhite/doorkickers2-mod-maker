@@ -1,0 +1,105 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: #000;
+}
+
+#threeCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+
+.ui-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 10;
+}
+
+.ui-warning {
+  background-color: rgba(20, 20, 20, 0.85);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  z-index: 1;
+  right: 20px;
+}
+
+.ui-panel {
+  background-color: rgba(20, 20, 20, 0.85);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  z-index: 1;
+  width: 300px;
+}
+
+.ui-panel h2 {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  color: #61dafb;
+}
+
+.ui-panel label {
+  display: block;
+  margin: 0.5rem 0 0.25rem;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.ui-panel input[type='file'] {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  text-indent: 0.4rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  border: none;
+  border-radius: 6px;
+  background: #333;
+  color: #fff;
+}
+
+.ui-panel button {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  background: #61dafb;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ui-panel button:hover {
+  background-color: #4dbde6;
+}
+
+#output {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 120px;
+  overflow-y: auto;
+  color: #ccc;
+  background: #111;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
