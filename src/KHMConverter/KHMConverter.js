@@ -83,8 +83,18 @@ const KHMConverter = ({ setSelectedOption }) => {
   };
 
   const handleLoadModel = async (e) => {
+    if (e.target.files.length === 0) return;
+
     // Reset current KHM model
     if (currentModel) {
+      // Cleanup helper orbs
+      // transform.detach(); // needed? removes controls from the orb
+      helperColorMap = {}; // reset color map for helpers
+      renderHelperLegend();
+      removeHelperOrbs(); // TODO: Why does it not remove all in one call??
+      removeHelperOrbs();
+      removeHelperOrbs();
+
       scene.current.remove(currentModel);
       currentModel.traverse((child) => {
         if (child.geometry) child.geometry.dispose();
@@ -135,15 +145,17 @@ const KHMConverter = ({ setSelectedOption }) => {
     currentModel = mesh;
     scene.current.add(mesh);
 
-    const position = geo.getAttribute('position');
-    const box = new THREE.Box3().setFromBufferAttribute(position);
-    const center = box.getCenter(new THREE.Vector3());
-    const size = new THREE.Vector3();
-    box.getSize(size);
-    const maxDim = Math.max(size.x, size.y, size.z);
-    const scale = 1.0 / maxDim;
-    geo.translate(-center.x, -center.y, -center.z);
-    geo.scale(scale, scale, scale);
+    // const position = geo.getAttribute('position');
+    // const box = new THREE.Box3().setFromBufferAttribute(position);
+    // const center = box.getCenter(new THREE.Vector3());
+    // const size = new THREE.Vector3();
+    // box.getSize(size);
+    // const maxDim = Math.max(size.x, size.y, size.z);
+    // const scale = 1.0 / maxDim;
+    // geo.translate(-center.x, -center.y, -center.z);
+    // geo.scale(scale, scale, scale);
+
+    addVisualHelpers(model, meshMaterial);
   };
 
   const applyDDSTexture = async (e) => {
@@ -172,8 +184,18 @@ const KHMConverter = ({ setSelectedOption }) => {
   };
 
   const handlePreviewGLB = async (e) => {
+    if (e.target.files.length === 0) return;
+
     if (previewModel) scene.current.remove(previewModel);
-    if (currentModel) scene.current.remove(currentModel);
+    if (currentModel) {
+      scene.current.remove(currentModel);
+
+      helperColorMap = {}; // reset color map for helpers
+      renderHelperLegend();
+      removeHelperOrbs(); // TODO: Why does it not remove all in one call??
+      removeHelperOrbs();
+      removeHelperOrbs();
+    }
 
     const file = e.target.files[0];
     const arrayBuffer = await file.arrayBuffer();
@@ -273,6 +295,70 @@ const KHMConverter = ({ setSelectedOption }) => {
     }
   };
 
+  function addVisualHelpers(model, material) {
+    if (model.lHelpers && model.lHelpers.length > 0) {
+      for (const helper of model.lHelpers) {
+        const matrix = new THREE.Matrix4()
+          .fromArray(Array.from(helper.matGlobal))
+          .transpose();
+
+        // Generate a color for each helper based on its name
+        const hash = [...helper.szName].reduce(
+          (acc, c) => acc + c.charCodeAt(0),
+          0
+        );
+        const hue = (hash * 37) % 360;
+        const color = new THREE.Color(`hsl(${hue}, 100%, 50%)`);
+        helperColorMap[helper.szName] = color.getStyle(); // store for legend
+
+        const blob = new THREE.Mesh(
+          new THREE.SphereGeometry(0.02),
+          new THREE.MeshBasicMaterial({ color })
+        );
+        blob.applyMatrix4(matrix);
+        blob.name = helper.szName;
+        blob.userData.isHelper = true;
+        scene.current.add(blob);
+
+        renderHelperLegend();
+      }
+    }
+  }
+
+  // Shows what colors belong to what helpers
+  let helperColorMap = {};
+  function renderHelperLegend(colorMap) {
+    const legend = document.getElementById('helperLegend');
+    if (!legend) return;
+
+    legend.style.display = 'block'; // show when helpers exist
+    legend.innerHTML = ``;
+    for (const [name, color] of Object.entries(helperColorMap)) {
+      legend.innerHTML += `
+       <div>
+         <span style="background:${color};"></span>${name}
+       </div>
+     `;
+    }
+  }
+
+  function removeHelperOrbs() {
+    scene.current.children.forEach((obj) => {
+      if (obj.isMesh && obj.geometry?.type === 'SphereGeometry') {
+        scene.current.remove(obj);
+
+        if (obj.geometry) obj.geometry.dispose();
+        if (obj.material) {
+          if (Array.isArray(obj.material)) {
+            obj.material.forEach((m) => m.dispose());
+          } else {
+            obj.material.dispose();
+          }
+        }
+      }
+    });
+  }
+
   return (
     <div style={{ height: '100%', overflow: 'hidden', background: '#000' }}>
       {/* <div style={{ zIndex: '1', position: 'relative' }}>
@@ -298,6 +384,7 @@ const KHMConverter = ({ setSelectedOption }) => {
             accept=".khm"
             onChange={handleLoadModel}
           />
+          <div id="helperLegend"></div>
           <label htmlFor="ddsInput">DDS Texture</label>
           <input
             type="file"
