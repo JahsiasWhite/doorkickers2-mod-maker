@@ -1,13 +1,15 @@
 # Doorkickers 2 Mod Maker
 
-Allows for easy creation of
+A simple, web-based tool for creating and customizing mods for **Door Kickers 2**.
+
+Supports quick editing and generation of:
 
 - Equipment
   - Ammo
   - Armor
-  - Firearms WIP
+  - Firearms _(WIP)_
   - Scopes
-- Classes WIP
+- Classes _(WIP)_
 - Game Settings
   - Human Parameters
   - Sound Ranges
@@ -15,12 +17,21 @@ Allows for easy creation of
 - Textures
   - Background Image
 - Music
+- KHM Viewer & Converter _(WIP)_
 
-## Starting
+Try it at: [dk2modmaker.com](https://dk2modmaker.com/)
 
+<img src="example.png" alt="Mod Maker Screenshot" width="500"/>
+
+## Getting Started
+
+```bash
+npm install
 npm run start
+```
 
-## TODO
+## Build for Production
 
-- info
-- error checking
+```bash
+npm run build
+```
